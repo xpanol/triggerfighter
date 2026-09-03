@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TRIGGER FIGHTER | XPAÑOL</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --gold: #F8AC10;
+    --purple: #7c3aed;
+    --turquoise: #007C95;
+
+    --bg: #0d0d0d;
+    --dark: #151515;
+    --dark2: #202020;
+    --dark3: #292929;
+
+    --text: #f5f5f5;
+    --muted: #a8a8a8;
+    --border: rgba(255,255,255,.12);
+
+    --green: #55c77a;
+    --red: #e56b6f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Special Elite", monospace;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 34px;
+
+    background: #0b0b0b;
+    border-bottom: 1px solid var(--border);
+}
+
+.logo img {
+    width: 165px;
+    height: auto;
+    display: block;
+}
+
+.module-name {
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    width: min(960px, calc(100% - 34px));
+    margin: 0 auto;
+    padding: 42px 0 60px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.header h1 {
+    margin: 0 0 12px;
+
+    color: var(--gold);
+
+    font-size: clamp(34px, 6vw, 54px);
+    letter-spacing: 3px;
+}
+
+.header p {
+    margin: 5px 0;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-area {
+    margin-bottom: 28px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 9px;
+
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.progress-number {
+    color: var(--gold);
+}
+
+.progress-track {
+    width: 100%;
+    height: 6px;
+
+    background: var(--dark3);
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+
+    background: var(--gold);
+
+    transition: width .4s ease;
+}
+
+/* =========================
+   LEVELS
+========================= */
+
+.level-selector {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+
+    margin-bottom: 30px;
+
+    flex-wrap: wrap;
+}
+
+.level-btn {
+    font-family: "Special Elite", monospace;
+
+    border: 1px solid var(--border);
+    background: var(--dark);
+
+    color: var(--muted);
+
+    padding: 10px 16px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    letter-spacing: .8px;
+
+    transition: .2s;
+}
+
+.level-btn:hover {
+    border-color: var(--gold);
+    color: var(--text);
+}
+
+.level-btn.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #111;
+}
+
+/* =========================
+   TRIGGER HEADER
+========================= */
+
+.trigger-header {
+    background: var(--dark);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px 14px 0 0;
+
+    padding: 26px 28px;
+}
+
+.category {
+    color: var(--purple);
+
+    font-size: 13px;
+    letter-spacing: 1.7px;
+
+    margin-bottom: 10px;
+}
+
+.trigger-title {
+    font-size: clamp(25px, 5vw, 36px);
+
+    line-height: 1.2;
+
+    margin-bottom: 18px;
+}
+
+.trigger-title-es {
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.4;
+
+    margin-bottom: 20px;
+}
+
+.trigger-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.mission {
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.mission strong {
+    color: var(--gold);
+}
+
+.pressure {
+    font-size: 15px;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chat-container {
+    background: #111;
+
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+
+    padding: 30px 25px 18px;
+
+    min-height: 390px;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 82%;
+
+    margin-bottom: 25px;
+
+    animation: messageIn .3s ease;
+}
+
+.message.client {
+    align-items: flex-start;
+}
+
+.message.you {
+    align-items: flex-end;
+
+    margin-left: auto;
+}
+
+.message-label {
+    font-size: 12px;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 7px;
+
+    color: #888;
+}
+
+.message.you .message-label {
+    color: var(--purple);
+}
+
+.bubble {
+    padding: 17px 20px;
+
+    border-radius: 15px;
+
+    line-height: 1.55;
+}
+
+.client .bubble {
+    background: var(--dark2);
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-top-left-radius: 3px;
+}
+
+.you .bubble {
+    background: var(--purple);
+
+    color: white;
+
+    border-top-right-radius: 3px;
+}
+
+/* bilingual content */
+
+.en {
+    display: block;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+.es {
+    display: block;
+
+    margin-top: 9px;
+
+    color: rgba(255,255,255,.66);
+
+    font-size: 18px;
+
+    line-height: 1.45;
+}
+
+.you .es {
+    color: rgba(255,255,255,.78);
+}
+
+/* =========================
+   RESPONSE AREA
+========================= */
+
+.response-area {
+    background: var(--dark);
+
+    border: 1px solid var(--border);
+    border-top: 0;
+
+    border-radius: 0 0 14px 14px;
+
+    padding: 24px 25px;
+}
+
+.response-title {
+    color: var(--gold);
+
+    font-size: 20px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 6px;
+
+    display: inline-block;
+
+    transform-origin: left center;
+
+    border-radius: 6px;
+
+    padding: 4px 7px 2px;
+
+    margin-left: -7px;
+}
+
+.response-area.awaiting-response .response-title {
+    animation: yourMoveSignal 1.35s ease-out 1;
+}
+
+.response-subtitle {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    margin-bottom: 19px;
+}
+
+.choices {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+.choice {
+    width: 100%;
+
+    text-align: left;
+
+    font-family: "Special Elite", monospace;
+
+    background: var(--dark2);
+
+    border: 1px solid rgba(255,255,255,.14);
+
+    color: var(--text);
+
+    border-radius: 11px;
+
+    padding: 17px 19px;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.choice:hover {
+    border-color: var(--gold);
+
+    background: var(--dark3);
+
+    transform: translateX(4px);
+}
+
+.choice:disabled {
+    opacity: .5;
+
+    cursor: default;
+
+    transform: none;
+}
+
+.choice-strategy {
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 12px;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 9px;
+}
+
+.choice-en {
+    display: block;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+.choice-es {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 18px;
+
+    line-height: 1.45;
+}
+
+.thinking {
+    display: none;
+
+    padding: 13px 0 3px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+.thinking.show {
+    display: block;
+}
+
+/* =========================
+   OUTCOME
+========================= */
+
+.outcome {
+    display: none;
+
+    margin-top: 25px;
+
+    background: var(--dark);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    animation: messageIn .4s ease;
+}
+
+.outcome.show {
+    display: block;
+}
+
+.outcome-status {
+    color: var(--green);
+
+    font-size: 29px;
+
+    line-height: 1.25;
+
+    margin-bottom: 5px;
+}
+
+.outcome-status-es {
+    color: rgba(255,255,255,.55);
+
+    font-size: 16px;
+
+    margin-bottom: 23px;
+}
+
+.outcome.failed .outcome-status {
+    color: var(--red);
+}
+
+.path-label,
+.pro-label,
+.why-label {
+    color: var(--gold);
+
+    font-size: 12px;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 9px;
+}
+
+.path {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+}
+
+.path-item {
+    background: var(--dark2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 5px;
+
+    padding: 7px 10px;
+
+    color: var(--gold);
+
+    font-size: 11px;
+}
+
+.pro-move {
+    border-left: 3px solid var(--gold);
+
+    padding-left: 16px;
+
+    margin-bottom: 22px;
+}
+
+.pro-en,
+.why-en {
+    font-size: 17px;
+
+    line-height: 1.55;
+
+    color: #eee;
+}
+
+.pro-es,
+.why-es {
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: var(--muted);
+
+    margin-top: 8px;
+}
+
+.why-box {
+    border-top: 1px solid var(--border);
+
+    padding-top: 20px;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navigation {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 27px;
+}
+
+.nav-btn {
+    font-family: "Special Elite", monospace;
+
+    border: 1px solid var(--border);
+
+    background: var(--dark);
+
+    color: var(--text);
+
+    padding: 13px 19px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    letter-spacing: .6px;
+
+    transition: .2s;
+}
+
+.nav-btn:hover {
+    border-color: var(--gold);
+}
+
+.nav-btn.primary {
+    background: var(--gold);
+
+    color: #111;
+
+    border-color: var(--gold);
+}
+
+.nav-btn:disabled {
+    opacity: .3;
+
+    cursor: default;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes yourMoveSignal {
+
+    0% {
+        opacity: .25;
+        color: var(--gold);
+        background: transparent;
+        transform: translateY(14px) scale(.9);
+        text-shadow: none;
+    }
+
+    18% {
+        opacity: 1;
+        color: #111;
+        background: var(--gold);
+        transform: translateY(-10px) scale(1.28);
+        text-shadow: none;
+    }
+
+    34% {
+        opacity: 1;
+        color: #111;
+        background: var(--gold);
+        transform: translateX(14px) translateY(-2px) scale(1.18);
+        text-shadow: none;
+    }
+
+    52% {
+        color: var(--gold);
+        background: rgba(248,172,16,.16);
+        transform: translateX(0) translateY(0) scale(1.08);
+        text-shadow: 0 0 18px rgba(248,172,16,.75);
+    }
+
+    72% {
+        color: var(--gold);
+        background: rgba(248,172,16,.08);
+        transform: translateX(8px) scale(1.03);
+        text-shadow: 0 0 12px rgba(248,172,16,.45);
+    }
+
+    100% {
+        opacity: 1;
+        color: var(--gold);
+        background: transparent;
+        transform: translateX(0) translateY(0) scale(1);
+        text-shadow: none;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .topbar {
+        height: 65px;
+
+        padding: 0 17px;
+    }
+
+    .logo img {
+        width: 135px;
+    }
+
+    .module-name {
+        font-size: 13px;
+    }
+
+    .container {
+        width: calc(100% - 18px);
+
+        padding-top: 27px;
+    }
+
+    .header h1 {
+        font-size: 35px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .trigger-header {
+        padding: 21px 18px;
+    }
+
+    .trigger-title {
+        font-size: 27px;
+    }
+
+    .trigger-title-es {
+        font-size: 15px;
+    }
+
+    .chat-container {
+        padding: 23px 14px 12px;
+    }
+
+    .message {
+        max-width: 94%;
+    }
+
+    .bubble {
+        padding: 15px 16px;
+    }
+
+    .en {
+        font-size: 18px;
+    }
+
+    .es {
+        font-size: 18px;
+    }
+
+    .response-area {
+        padding: 20px 14px;
+    }
+
+    .choice {
+        padding: 16px;
+    }
+
+    .choice-en {
+        font-size: 18px;
+    }
+
+    .choice-es {
+        font-size: 18px;
+    }
+
+    .outcome {
+        padding: 22px 18px;
+    }
+
+    .navigation {
+        flex-wrap: wrap;
+    }
+
+    .nav-btn {
+        flex: 1;
+
+        min-width: 100px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        <img src="logo.png" alt="XPAÑOL">
+    </div>
+
+    <div class="module-name">
+        TRIGGER FIGHTER
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="header">
+
+        <h1>TRIGGER FIGHTER</h1>
+
+        <p>
+            SUPERA BLOQUEOS, ACTÚA SIN DUDAR, ENFRENTA RETOS
+        </p>
+
+        <p>
+            OVERCOME BLOCKS, ACT WITHOUT HESITATION, FACE CHALLENGES
+        </p>
+
+    </section>
+
+
+    <div class="progress-area">
+
+        <div class="progress-info">
+
+            <span id="progressLabel">
+                TRIGGER 1 OF 30
+            </span>
+
+            <span class="progress-number" id="progressPercent">
+                3%
+            </span>
+
+        </div>
+
+        <div class="progress-track">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="level-selector">
+
+        <button class="level-btn active" data-level="react" data-required="0" data-start="0" data-label="LEVEL 1 · REACT">
+            LEVEL 1 · REACT
+        </button>
+
+        <button class="level-btn" data-level="pressure" data-required="10" data-start="10" data-label="LEVEL 2 · UNDER PRESSURE">
+            🔒 LEVEL 2 · UNDER PRESSURE
+        </button>
+
+        <button class="level-btn" data-level="fighter" data-required="20" data-start="20" data-label="LEVEL 3 · FIGHTER MODE">
+            🔒 LEVEL 3 · FIGHTER MODE
+        </button>
+
+    </div>
+
+
+    <section class="trigger-header">
+
+        <div class="category" id="category"></div>
+
+        <div class="trigger-title" id="triggerTitle"></div>
+
+        <div class="trigger-title-es" id="triggerTitleEs"></div>
+
+        <div class="trigger-meta">
+
+            <div class="mission">
+
+                <strong>MISSION:</strong>
+
+                <span id="mission"></span>
+
+            </div>
+
+            <div class="pressure" id="pressure"></div>
+
+        </div>
+
+    </section>
+
+
+    <section class="chat-container" id="chat"></section>
+
+
+    <section class="response-area" id="responseArea">
+
+        <div class="response-title">
+            YOUR MOVE
+        </div>
+
+        <div class="response-subtitle">
+            Choose how you respond.
+            / Elige cómo respondes.
+        </div>
+
+        <div class="choices" id="choices"></div>
+
+        <div class="thinking" id="thinking">
+            The client is responding...
+            / El cliente está respondiendo...
+        </div>
+
+    </section>
+
+
+    <section class="outcome" id="outcome">
+
+        <div class="outcome-status" id="outcomeStatus">
+            TRIGGER DEFEATED
+        </div>
+
+        <div class="outcome-status-es" id="outcomeStatusEs">
+            TRIGGER SUPERADO
+        </div>
+
+
+        <div class="path-label">
+            YOUR PATH / TU CAMINO
+        </div>
+
+        <div class="path" id="path"></div>
+
+
+        <div class="pro-move">
+
+            <div class="pro-label">
+                PRO MOVE / MOVIMIENTO PRO
+            </div>
+
+            <div class="pro-en" id="proMoveEn"></div>
+
+            <div class="pro-es" id="proMoveEs"></div>
+
+        </div>
+
+
+        <div class="why-box">
+
+            <div class="why-label">
+                WHY IT WORKS / POR QUÉ FUNCIONA
+            </div>
+
+            <div class="why-en" id="whyWorksEn"></div>
+
+            <div class="why-es" id="whyWorksEs"></div>
+
+        </div>
+
+    </section>
+
+
+    <div class="navigation">
+
+        <button class="nav-btn" id="previousBtn">
+            ← PREVIOUS
+        </button>
+
+        <button class="nav-btn" id="restartBtn">
+            ↻ TRY AGAIN
+        </button>
+
+        <button class="nav-btn primary" id="nextBtn">
+            NEXT →
+        </button>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   TRIGGER DATA
+========================================================= */
+
+const triggers = [
+
+/* =========================================================
+   1
+========================================================= */
+
+{
+    category: "CLIENT PRESSURE",
+    title: "THE CAMPAIGN ISN'T WORKING",
+    titleEs: "LA CAMPAÑA NO ESTÁ FUNCIONANDO",
+
+    mission: "Stay calm and move toward evidence.",
+    pressure: "🔥 HIGH",
+
+    opening: {
+        en: "The campaign isn't delivering. We've been running it for three weeks.",
+        es: "La campaña no está dando resultados. Llevamos tres semanas con ella."
+    },
+
+    nodes: {
+
+        start: {
+            choices: [
+
+                {
+                    strategy: "ACKNOWLEDGE",
+                    en: "I understand the concern. Let me take a closer look at the latest data.",
+                    es: "Entiendo la preocupación. Déjame revisar los últimos datos con más detalle.",
+                    next: "data"
+                },
+
+                {
+                    strategy: "DEFEND",
+                    en: "The campaign is actually performing within the expected range.",
+                    es: "En realidad, la campaña está funcionando dentro del rango esperado.",
+                    next: "defensive"
+                },
+
+                {
+                    strategy: "PUSH BACK",
+                    en: "Three weeks isn't enough time to judge the campaign properly.",
+                    es: "Tres semanas no son suficientes para evaluar bien la campaña.",
+                    next: "pushback"
+                }
+            ]
+        },
+
+        data: {
+            client: {
+                en: "Fine. What exactly are you seeing in the numbers?",
+                es: "De acuerdo. ¿Qué estás viendo exactamente en los datos?"
+            },
+
+            choices: [
+
+                {
+                    strategy: "FOCUS",
+                    en: "I'm looking at conversion rate, cost per lead and lead quality.",
+                    es: "Estoy revisando la tasa de conversión, el coste por lead y la calidad de los leads.",
+                    next: "solution"
+                },
+
+                {
+                    strategy: "VAGUE",
+                    en: "There are several things that could be affecting performance.",
+                    es: "Hay varias cosas que podrían estar afectando al rendimiento.",
+                    next: "vague"
+                },
+
+                {
+                    strategy: "ESCALATE",
+                    en: "I'll need the analytics team to investigate this first.",
+                    es: "Primero necesitaré que el equipo de analítica lo investigue.",
+                    next: "escalate"
+                }
+            ]
+        },
+
+        solution: {
+            client: {
+                en: "Good. So what would you change?",
+                es: "Bien. Entonces, ¿qué cambiarías?"
+            },
+
+            choices: [
+
+                {
+                    strategy: "ACTION",
+                    en: "I'd test the landing page and tighten the audience targeting before changing the whole campaign.",
+                    es: "Probaría la landing page y ajustaría la segmentación antes de cambiar toda la campaña.",
+                    next: "win"
+                },
+
+                {
+                    strategy: "PANIC",
+                    en: "I'd probably stop the campaign and start again.",
+                    es: "Probablemente pararía la campaña y empezaría de nuevo.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "DELAY",
+                    en: "I'd wait another few weeks before making any changes.",
+                    es: "Esperaría unas semanas más antes de hacer cambios.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        defensive: {
+            client: {
+                en: "That sounds defensive. I'm asking why we're not getting better results.",
+                es: "Eso suena defensivo. Pregunto por qué no estamos obteniendo mejores resultados."
+            },
+
+            choices: [
+
+                {
+                    strategy: "RESET",
+                    en: "You're right. Let me focus on the issue rather than defending the campaign.",
+                    es: "Tienes razón. Déjame centrarme en el problema en lugar de defender la campaña.",
+                    next: "data"
+                },
+
+                {
+                    strategy: "DEFEND",
+                    en: "I'm just explaining that the campaign isn't failing.",
+                    es: "Solo estoy explicando que la campaña no está fracasando.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "BLAME",
+                    en: "The problem is mainly the quality of the traffic we're receiving.",
+                    es: "El problema está principalmente en la calidad del tráfico que recibimos.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        pushback: {
+            client: {
+                en: "I don't want another explanation. I want to know what we can do.",
+                es: "No quiero otra explicación. Quiero saber qué podemos hacer."
+            },
+
+            choices: [
+
+                {
+                    strategy: "ACTION",
+                    en: "Let's identify the biggest bottleneck and test one change first.",
+                    es: "Identifiquemos el mayor cuello de botella y probemos primero un cambio.",
+                    next: "solution"
+                },
+
+                {
+                    strategy: "ARGUE",
+                    en: "We need to give the campaign more time.",
+                    es: "Tenemos que darle más tiempo a la campaña.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "SHIFT",
+                    en: "I'll send you a full report later today.",
+                    es: "Te enviaré un informe completo más tarde.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        vague: {
+            client: {
+                en: "Which things? I need something more concrete.",
+                es: "¿Qué cosas? Necesito algo más concreto."
+            },
+
+            choices: [
+
+                {
+                    strategy: "CLARIFY",
+                    en: "The strongest signal is the drop between clicks and completed leads.",
+                    es: "La señal más clara está en la caída entre los clics y los leads completados.",
+                    next: "solution"
+                },
+
+                {
+                    strategy: "HEDGE",
+                    en: "It's difficult to say without looking at everything together.",
+                    es: "Es difícil decirlo sin analizarlo todo en conjunto.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "DELEGATE",
+                    en: "The analytics team can give you a more precise answer.",
+                    es: "El equipo de analítica puede darte una respuesta más precisa.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        escalate: {
+            client: {
+                en: "You're the person managing the campaign. I need your view now.",
+                es: "Tú gestionas la campaña. Necesito tu opinión ahora."
+            },
+
+            choices: [
+
+                {
+                    strategy: "OWN IT",
+                    en: "My initial view is that the landing page is the first thing we should test.",
+                    es: "Mi primera impresión es que deberíamos probar primero la landing page.",
+                    next: "solution"
+                },
+
+                {
+                    strategy: "PASS IT ON",
+                    en: "I'd rather wait for the analytics team before saying anything.",
+                    es: "Prefiero esperar al equipo de analítica antes de decir nada.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "STALL",
+                    en: "I'll come back to you once I've checked everything.",
+                    es: "Volveré a hablar contigo cuando lo haya revisado todo.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        win: {
+            end: true,
+            success: true,
+
+            proMove: {
+                en: "Acknowledge the concern, identify the bottleneck and propose a focused test.",
+                es: "Reconoce la preocupación, identifica el cuello de botella y propone una prueba concreta."
+            },
+
+            why: {
+                en: "You don't fight the client's emotion. You turn pressure into a specific business decision.",
+                es: "No luchas contra la emoción del cliente. Transformas la presión en una decisión empresarial concreta."
+            }
+        },
+
+        lose: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Avoid defending or abandoning the campaign before identifying the actual problem.",
+                es: "Evita defender o abandonar la campaña antes de identificar el problema real."
+            },
+
+            why: {
+                en: "A defensive or reactive answer increases tension without creating a next step.",
+                es: "Una respuesta defensiva o reactiva aumenta la tensión sin crear un siguiente paso."
+            }
+        },
+
+        weak: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Give the client one concrete observation and one concrete next action.",
+                es: "Da al cliente una observación concreta y una acción concreta."
+            },
+
+            why: {
+                en: "Vague language makes uncertainty feel bigger and weakens your position.",
+                es: "El lenguaje vago aumenta la sensación de incertidumbre y debilita tu posición."
+            }
+        }
+    }
+},
+
+/* =========================================================
+   2
+========================================================= */
+
+{
+    category: "DEADLINE PRESSURE",
+    title: "WHERE IS THE REPORT?",
+    titleEs: "¿DÓNDE ESTÁ EL INFORME?",
+
+    mission: "Respond without overpromising.",
+    pressure: "🔥 HIGH",
+
+    opening: {
+        en: "I thought the report was going to be ready this morning. Where is it?",
+        es: "Pensaba que el informe estaría listo esta mañana. ¿Dónde está?"
+    },
+
+    nodes: {
+
+        start: {
+            choices: [
+
+                {
+                    strategy: "OWN IT",
+                    en: "You're right. It's not ready yet. I'm finishing the final data checks.",
+                    es: "Tienes razón. Todavía no está listo. Estoy terminando las comprobaciones finales de los datos.",
+                    next: "reason"
+                },
+
+                {
+                    strategy: "EXCUSE",
+                    en: "I was waiting for some information from another team.",
+                    es: "Estaba esperando información de otro equipo.",
+                    next: "blame"
+                },
+
+                {
+                    strategy: "PROMISE",
+                    en: "I'll have it to you in the next thirty minutes.",
+                    es: "Lo tendrás en los próximos treinta minutos.",
+                    next: "promise"
+                }
+            ]
+        },
+
+        reason: {
+            client: {
+                en: "How much longer do you need?",
+                es: "¿Cuánto tiempo más necesitas?"
+            },
+
+            choices: [
+
+                {
+                    strategy: "REALISTIC",
+                    en: "I need about an hour to validate the figures properly.",
+                    es: "Necesito aproximadamente una hora para validar bien las cifras.",
+                    next: "win"
+                },
+
+                {
+                    strategy: "OVERPROMISE",
+                    en: "Probably twenty minutes.",
+                    es: "Probablemente veinte minutos.",
+                    next: "promise"
+                },
+
+                {
+                    strategy: "UNCLEAR",
+                    en: "It depends on what I find in the final checks.",
+                    es: "Depende de lo que encuentre en las comprobaciones finales.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        blame: {
+            client: {
+                en: "I don't need to know whose fault it is. I need the report.",
+                es: "No necesito saber de quién es la culpa. Necesito el informe."
+            },
+
+            choices: [
+
+                {
+                    strategy: "RESET",
+                    en: "Understood. I'll take ownership and give you a realistic delivery time.",
+                    es: "Entendido. Me hago responsable y te doy un plazo realista.",
+                    next: "reason"
+                },
+
+                {
+                    strategy: "DEFEND",
+                    en: "But I couldn't complete it without their information.",
+                    es: "Pero no podía completarlo sin su información.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "ESCALATE",
+                    en: "I'll ask my manager to help speed things up.",
+                    es: "Pediré a mi responsable que ayude a acelerar el proceso.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        promise: {
+            client: {
+                en: "Are you sure? I need to send it to the client at noon.",
+                es: "¿Estás segura? Tengo que enviárselo al cliente al mediodía."
+            },
+
+            choices: [
+
+                {
+                    strategy: "CORRECT",
+                    en: "Let me be more precise. I need an hour to make sure the figures are accurate.",
+                    es: "Déjame ser más precisa. Necesito una hora para asegurarme de que las cifras sean correctas.",
+                    next: "win"
+                },
+
+                {
+                    strategy: "DOUBLE DOWN",
+                    en: "Yes. I'll make it happen.",
+                    es: "Sí. Lo conseguiré.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "STALL",
+                    en: "I'll try my best to get it done as quickly as possible.",
+                    es: "Haré todo lo posible para terminarlo cuanto antes.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        win: {
+            end: true,
+            success: true,
+
+            proMove: {
+                en: "Own the delay, give a realistic timeframe and protect quality.",
+                es: "Asume el retraso, da un plazo realista y protege la calidad."
+            },
+
+            why: {
+                en: "A realistic commitment is more credible than a fast promise you may miss.",
+                es: "Un compromiso realista es más creíble que una promesa rápida que quizá no puedas cumplir."
+            }
+        },
+
+        lose: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Never invent a deadline simply because the other person is under pressure.",
+                es: "Nunca inventes un plazo simplemente porque la otra persona esté bajo presión."
+            },
+
+            why: {
+                en: "An unrealistic promise turns a small delay into a credibility problem.",
+                es: "Una promesa poco realista convierte un pequeño retraso en un problema de credibilidad."
+            }
+        },
+
+        weak: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Replace vague timing with a specific estimate.",
+                es: "Sustituye el plazo vago por una estimación concreta."
+            },
+
+            why: {
+                en: "The client needs predictability, not another expression of uncertainty.",
+                es: "El cliente necesita previsibilidad, no otra expresión de incertidumbre."
+            }
+        }
+    }
+},
+
+/* =========================================================
+   3
+========================================================= */
+
+{
+    category: "SCOPE CREEP",
+    title: "CAN YOU JUST ADD THIS?",
+    titleEs: "¿PUEDES AÑADIR ESTO?",
+
+    mission: "Protect scope without sounding difficult.",
+    pressure: "⚡ MEDIUM",
+
+    opening: {
+        en: "Can you just add this one extra feature before launch?",
+        es: "¿Puedes añadir esta función extra antes del lanzamiento?"
+    },
+
+    nodes: {
+
+        start: {
+            choices: [
+
+                {
+                    strategy: "CLARIFY",
+                    en: "We can look at it. Let me check what impact it would have on the current scope.",
+                    es: "Podemos estudiarlo. Déjame comprobar qué impacto tendría en el alcance actual.",
+                    next: "impact"
+                },
+
+                {
+                    strategy: "YES",
+                    en: "Sure, that's easy. I'll add it.",
+                    es: "Claro, es fácil. Lo añadiré.",
+                    next: "overpromise"
+                },
+
+                {
+                    strategy: "NO",
+                    en: "No. That's outside the scope.",
+                    es: "No. Eso está fuera del alcance.",
+                    next: "hardno"
+                }
+            ]
+        },
+
+        impact: {
+            client: {
+                en: "It's a small change. I don't see why it would affect the timeline.",
+                es: "Es un cambio pequeño. No veo por qué debería afectar al plazo."
+            },
+
+            choices: [
+
+                {
+                    strategy: "FRAME",
+                    en: "The change itself is small, but it affects testing and the final approval process.",
+                    es: "El cambio en sí es pequeño, pero afecta a las pruebas y al proceso de aprobación final.",
+                    next: "win"
+                },
+
+                {
+                    strategy: "ARGUE",
+                    en: "Because every change takes more time than you think.",
+                    es: "Porque cada cambio lleva más tiempo del que crees.",
+                    next: "weak"
+                },
+
+                {
+                    strategy: "REFUSE",
+                    en: "Then we'll have to leave it out.",
+                    es: "Entonces tendremos que dejarlo fuera.",
+                    next: "hardno"
+                }
+            ]
+        },
+
+        overpromise: {
+            client: {
+                en: "Great. When will it be ready?",
+                es: "Perfecto. ¿Cuándo estará listo?"
+            },
+
+            choices: [
+
+                {
+                    strategy: "RESET",
+                    en: "Before I commit, I need to check the impact on the current delivery plan.",
+                    es: "Antes de comprometerme, necesito comprobar el impacto en el plan de entrega actual.",
+                    next: "impact"
+                },
+
+                {
+                    strategy: "PROMISE",
+                    en: "I'll have it ready before launch.",
+                    es: "Lo tendré listo antes del lanzamiento.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "HEDGE",
+                    en: "I'll see what I can do.",
+                    es: "Veré qué puedo hacer.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        hardno: {
+            client: {
+                en: "I'm not asking for much. Can't you be flexible?",
+                es: "No estoy pidiendo mucho. ¿No puedes ser flexible?"
+            },
+
+            choices: [
+
+                {
+                    strategy: "FLEX",
+                    en: "I can be flexible. We just need to agree what moves out of the current scope.",
+                    es: "Puedo ser flexible. Solo tenemos que acordar qué sale del alcance actual.",
+                    next: "win"
+                },
+
+                {
+                    strategy: "HARD NO",
+                    en: "No. We agreed on the scope.",
+                    es: "No. Acordamos el alcance.",
+                    next: "lose"
+                },
+
+                {
+                    strategy: "PASS",
+                    en: "You'll need to discuss that with the project manager.",
+                    es: "Tendrás que hablarlo con el project manager.",
+                    next: "weak"
+                }
+            ]
+        },
+
+        win: {
+            end: true,
+            success: true,
+
+            proMove: {
+                en: "Say yes to the possibility, but make the trade-off visible.",
+                es: "Di sí a la posibilidad, pero haz visible el intercambio necesario."
+            },
+
+            why: {
+                en: "Scope management works best when flexibility is linked to priorities.",
+                es: "La gestión del alcance funciona mejor cuando la flexibilidad está vinculada a las prioridades."
+            }
+        },
+
+        lose: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Never accept additional scope without checking the consequences.",
+                es: "Nunca aceptes alcance adicional sin comprobar las consecuencias."
+            },
+
+            why: {
+                en: "An easy yes today can become a delivery problem tomorrow.",
+                es: "Un sí fácil hoy puede convertirse en un problema de entrega mañana."
+            }
+        },
+
+        weak: {
+            end: true,
+            success: false,
+
+            proMove: {
+                en: "Avoid vague promises and make the trade-off explicit.",
+                es: "Evita las promesas vagas y haz explícito el intercambio."
+            },
+
+            why: {
+                en: "Ambiguity creates expectations that nobody has actually agreed to.",
+                es: "La ambigüedad crea expectativas que nadie ha acordado realmente."
+            }
+        }
+    }
+},
+
+/* =========================================================
+   4-30
+   Generic but distinct workplace triggers
+========================================================= */
+
+{
+    category:"FEEDBACK",
+    title:"THIS ISN'T GOOD ENOUGH",
+    titleEs:"ESTO NO ES SUFICIENTEMENTE BUENO",
+    mission:"Receive criticism without becoming defensive.",
+    pressure:"🔥 HIGH",
+    opening:{
+        en:"Honestly, this isn't good enough. I expected something much stronger.",
+        es:"Sinceramente, esto no es suficientemente bueno. Esperaba algo mucho mejor."
+    },
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CLARIFY",en:"Can you tell me which part isn't meeting your expectations?",es:"¿Puedes decirme qué parte no cumple tus expectativas?",next:"detail"},
+                {strategy:"DEFEND",en:"I think the work is actually quite strong.",es:"Creo que el trabajo es bastante bueno.",next:"lose"},
+                {strategy:"APOLOGISE",en:"I'm sorry. I'll redo the whole thing.",es:"Lo siento. Volveré a hacer todo.",next:"overreaction"}
+            ]
+        },
+        detail:{
+            client:{en:"The message isn't clear enough for the target audience.",es:"El mensaje no es suficientemente claro para el público objetivo."},
+            choices:[
+                {strategy:"FOCUS",en:"That's useful. Let's identify what needs to become clearer.",es:"Eso es útil. Identifiquemos qué tiene que quedar más claro.",next:"win"},
+                {strategy:"ARGUE",en:"But the audience should understand it.",es:"Pero el público debería entenderlo.",next:"lose"},
+                {strategy:"ACTION",en:"I'll simplify the main message and test it again.",es:"Simplificaré el mensaje principal y volveré a probarlo.",next:"win"}
+            ]
+        },
+        overreaction:{
+            client:{en:"I didn't ask you to redo everything. I want the main issue fixed.",es:"No te he pedido que rehagas todo. Quiero que soluciones el problema principal."},
+            choices:[
+                {strategy:"RESET",en:"Understood. I'll focus on the specific issue first.",es:"Entendido. Me centraré primero en el problema concreto.",next:"win"},
+                {strategy:"PANIC",en:"I just want to make sure you're happy with it.",es:"Solo quiero asegurarme de que estés satisfecho.",next:"lose"},
+                {strategy:"CLARIFY",en:"Which change would make the biggest difference?",es:"¿Qué cambio marcaría la mayor diferencia?",next:"win"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Turn general criticism into a specific improvement.",es:"Convierte una crítica general en una mejora concreta."},why:{en:"Specific questions reduce emotional tension and create useful feedback.",es:"Las preguntas concretas reducen la tensión emocional y crean feedback útil."}},
+        lose:{end:true,success:false,proMove:{en:"Don't defend your work before understanding the criticism.",es:"No defiendas tu trabajo antes de entender la crítica."},why:{en:"Defensiveness shifts the conversation away from solving the problem.",es:"La actitud defensiva aleja la conversación de la solución."}},
+        overreaction:{end:true,success:false,proMove:{en:"Don't react to criticism by abandoning everything.",es:"No reacciones a la crítica abandonándolo todo."},why:{en:"Overreacting makes a manageable issue look much bigger.",es:"Una reacción exagerada hace que un problema manejable parezca mucho mayor."}}
+    }
+},
+
+{
+    category:"PRIORITIES",
+    title:"EVERYTHING IS URGENT",
+    titleEs:"TODO ES URGENTE",
+    mission:"Create priorities instead of absorbing pressure.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I need all of this today. Everything is urgent.",es:"Necesito todo esto hoy. Todo es urgente."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"PRIORITISE",en:"Let's identify what has the highest business impact first.",es:"Identifiquemos primero qué tiene mayor impacto empresarial.",next:"priority"},
+                {strategy:"AGREE",en:"Okay. I'll try to get everything done.",es:"Vale. Intentaré terminarlo todo.",next:"lose"},
+                {strategy:"REFUSE",en:"That's impossible.",es:"Eso es imposible.",next:"hard"}
+            ]
+        },
+        priority:{
+            client:{en:"The client-facing items are the most important.",es:"Lo más importante son los elementos que afectan al cliente."},
+            choices:[
+                {strategy:"CONFIRM",en:"Then I'll prioritise those and update you on the remaining items.",es:"Entonces priorizaré esos y te informaré sobre el resto.",next:"win"},
+                {strategy:"QUESTION",en:"Are you sure? Everything seems important.",es:"¿Seguro? Todo parece importante.",next:"weak"},
+                {strategy:"STALL",en:"I'll see how much I can complete.",es:"Veré cuánto puedo terminar.",next:"weak"}
+            ]
+        },
+        hard:{
+            client:{en:"I know it's a lot, but I still need progress today.",es:"Sé que es mucho, pero necesito avances hoy."},
+            choices:[
+                {strategy:"RESET",en:"I can make progress today, but we need to agree what comes first.",es:"Puedo avanzar hoy, pero tenemos que acordar qué va primero.",next:"win"},
+                {strategy:"ARGUE",en:"You can't expect everything immediately.",es:"No puedes esperar todo inmediatamente.",next:"lose"},
+                {strategy:"ESCALATE",en:"I'll ask for more people.",es:"Pediré más personas.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Turn urgency into an explicit priority order.",es:"Convierte la urgencia en un orden de prioridades explícito."},why:{en:"Prioritisation creates control without rejecting the request.",es:"La priorización crea control sin rechazar la petición."}},
+        lose:{end:true,success:false,proMove:{en:"Don't accept impossible workload without prioritisation.",es:"No aceptes una carga de trabajo imposible sin priorizar."},why:{en:"Trying to do everything often means doing nothing well.",es:"Intentar hacerlo todo suele significar no hacer nada bien."}},
+        weak:{end:true,success:false,proMove:{en:"Replace uncertainty with a clear priority discussion.",es:"Sustituye la incertidumbre por una conversación clara sobre prioridades."},why:{en:"Without priorities, urgency becomes noise.",es:"Sin prioridades, la urgencia se convierte en ruido."}}
+    }
+},
+
+{
+    category:"OWNERSHIP",
+    title:"WHO IS RESPONSIBLE?",
+    titleEs:"¿QUIÉN ES RESPONSABLE?",
+    mission:"Establish ownership clearly.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"Who is actually responsible for this? I keep hearing different answers.",es:"¿Quién es realmente responsable de esto? No paro de recibir respuestas diferentes."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"OWNERSHIP",en:"I'll clarify the ownership and come back with one clear answer.",es:"Aclararé quién es responsable y volveré con una respuesta clara.",next:"follow"},
+                {strategy:"DEFLECT",en:"I think another team owns it.",es:"Creo que es responsabilidad de otro equipo.",next:"weak"},
+                {strategy:"GUESS",en:"It should probably be the account team.",es:"Probablemente sea responsabilidad del equipo de cuentas.",next:"lose"}
+            ]
+        },
+        follow:{
+            client:{en:"Good. When can you confirm it?",es:"Bien. ¿Cuándo puedes confirmarlo?"},
+            choices:[
+                {strategy:"COMMIT",en:"I'll confirm it today and document the owner.",es:"Lo confirmaré hoy y documentaré al responsable.",next:"win"},
+                {strategy:"VAGUE",en:"I'll try to find out soon.",es:"Intentaré averiguarlo pronto.",next:"weak"},
+                {strategy:"PASS",en:"You may need to ask the project manager.",es:"Quizá tengas que preguntárselo al project manager.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Make ownership explicit and document it.",es:"Haz explícita la responsabilidad y documéntala."},why:{en:"Clear ownership prevents work from disappearing between teams.",es:"Una responsabilidad clara evita que el trabajo desaparezca entre equipos."}},
+        lose:{end:true,success:false,proMove:{en:"Don't guess ownership.",es:"No adivines quién es responsable."},why:{en:"Guessing creates more confusion and weakens trust.",es:"Adivinar crea más confusión y debilita la confianza."}},
+        weak:{end:true,success:false,proMove:{en:"Replace 'I think' with a verified owner.",es:"Sustituye 'creo que' por un responsable verificado."},why:{en:"Unverified ownership keeps the issue unresolved.",es:"Una responsabilidad no verificada mantiene el problema sin resolver."}}
+    }
+},
+
+{
+    category:"DEPENDENCIES",
+    title:"WHY ISN'T THIS READY?",
+    titleEs:"¿POR QUÉ NO ESTÁ LISTO?",
+    mission:"Surface dependencies early.",
+    pressure:"🔥 HIGH",
+    opening:{en:"Why isn't this ready? We agreed on the deadline.",es:"¿Por qué no está listo? Acordamos la fecha límite."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"MAP",en:"The delay comes from two dependencies that weren't completed on time.",es:"El retraso viene de dos dependencias que no se completaron a tiempo.",next:"detail"},
+                {strategy:"BLAME",en:"Another team didn't deliver what we needed.",es:"Otro equipo no entregó lo que necesitábamos.",next:"blame"},
+                {strategy:"APOLOGISE",en:"Sorry. We'll try to catch up.",es:"Lo siento. Intentaremos recuperar el tiempo.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"Why weren't those dependencies identified earlier?",es:"¿Por qué no se identificaron antes esas dependencias?"},
+            choices:[
+                {strategy:"OWN",en:"They weren't mapped clearly enough. That's something we need to improve.",es:"No se mapearon con suficiente claridad. Es algo que tenemos que mejorar.",next:"win"},
+                {strategy:"DEFEND",en:"We couldn't have known everything in advance.",es:"No podíamos saberlo todo de antemano.",next:"lose"},
+                {strategy:"ACTION",en:"I'll document the dependencies and owners before the next milestone.",es:"Documentaré las dependencias y responsables antes del próximo hito.",next:"win"}
+            ]
+        },
+        blame:{
+            client:{en:"That's not helping me. What are you doing about it?",es:"Eso no me ayuda. ¿Qué estás haciendo al respecto?"},
+            choices:[
+                {strategy:"ACTION",en:"I'm confirming the dependency owners and the revised delivery date.",es:"Estoy confirmando los responsables de las dependencias y la nueva fecha de entrega.",next:"win"},
+                {strategy:"BLAME",en:"They need to improve their planning.",es:"Tienen que mejorar su planificación.",next:"lose"},
+                {strategy:"STALL",en:"I'll let you know when I have more information.",es:"Te informaré cuando tenga más información.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Own the process problem and create a prevention step.",es:"Asume el problema de proceso y crea una medida preventiva."},why:{en:"Ownership plus prevention is stronger than explaining who caused the delay.",es:"Asumir la responsabilidad y prevenir es más eficaz que explicar quién causó el retraso."}},
+        lose:{end:true,success:false,proMove:{en:"Don't turn a dependency problem into a blame game.",es:"No conviertas un problema de dependencias en un juego de culpas."},why:{en:"Blame rarely answers the client's real question: what happens next?",es:"Culpar rara vez responde a la pregunta real del cliente: ¿qué pasa ahora?"}},
+        weak:{end:true,success:false,proMove:{en:"Give a concrete next step instead of vague reassurance.",es:"Da un siguiente paso concreto en lugar de una tranquilidad vaga."},why:{en:"The client needs visibility, not another promise to update later.",es:"El cliente necesita visibilidad, no otra promesa de informar más tarde."}}
+    }
+},
+
+{
+    category:"MEETING",
+    title:"CAN WE HAVE A QUICK CALL?",
+    titleEs:"¿PODEMOS HACER UNA LLAMADA RÁPIDA?",
+    mission:"Protect focus while staying collaborative.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"Can we jump on a quick call now? It's really important.",es:"¿Podemos hacer una llamada rápida ahora? Es realmente importante."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CLARIFY",en:"Sure. What would you like to resolve on the call?",es:"Claro. ¿Qué te gustaría resolver en la llamada?",next:"purpose"},
+                {strategy:"YES",en:"Sure, call me now.",es:"Claro, llámame ahora.",next:"weak"},
+                {strategy:"REFUSE",en:"I don't have time right now.",es:"Ahora no tengo tiempo.",next:"hard"}
+            ]
+        },
+        purpose:{
+            client:{en:"I need to discuss the campaign results.",es:"Necesito hablar de los resultados de la campaña."},
+            choices:[
+                {strategy:"STRUCTURE",en:"I can give you ten minutes now, and we can book a longer discussion if needed.",es:"Puedo darte diez minutos ahora y podemos reservar una conversación más larga si hace falta.",next:"win"},
+                {strategy:"DELAY",en:"Let's just schedule something for tomorrow.",es:"Programemos algo para mañana.",next:"weak"},
+                {strategy:"AVOID",en:"Can you send me an email instead?",es:"¿Puedes enviarme un email en su lugar?",next:"weak"}
+            ]
+        },
+        hard:{
+            client:{en:"It really is urgent.",es:"Realmente es urgente."},
+            choices:[
+                {strategy:"BOUNDARY",en:"Understood. Give me the key issue in one sentence and I'll tell you what we should do next.",es:"Entendido. Dime el problema principal en una frase y te diré qué deberíamos hacer después.",next:"win"},
+                {strategy:"REFUSE",en:"Everyone says that.",es:"Todo el mundo dice eso.",next:"lose"},
+                {strategy:"IGNORE",en:"I'll get back to you later.",es:"Te responderé más tarde.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Clarify urgency and create the smallest useful interaction.",es:"Aclara la urgencia y crea la interacción útil más pequeña."},why:{en:"You protect your time without dismissing the other person's concern.",es:"Proteges tu tiempo sin ignorar la preocupación de la otra persona."}},
+        lose:{end:true,success:false,proMove:{en:"Don't dismiss urgency without understanding it.",es:"No descartes la urgencia sin entenderla."},why:{en:"A boundary works better when it still provides a path forward.",es:"Un límite funciona mejor cuando sigue ofreciendo un camino hacia adelante."}},
+        weak:{end:true,success:false,proMove:{en:"Clarify the purpose before committing to a meeting.",es:"Aclara el objetivo antes de comprometerte a una reunión."},why:{en:"Unstructured meetings consume time without necessarily solving the issue.",es:"Las reuniones sin estructura consumen tiempo sin necesariamente resolver el problema."}}
+    }
+},
+
+{
+    category:"CLIENT EXPECTATIONS",
+    title:"I THOUGHT THIS WAS INCLUDED",
+    titleEs:"PENSABA QUE ESTO ESTABA INCLUIDO",
+    mission:"Handle an expectation mismatch professionally.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I thought this was included in the original agreement.",es:"Pensaba que esto estaba incluido en el acuerdo original."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CHECK",en:"Let's review the agreed scope so we can see exactly what was included.",es:"Revisemos el alcance acordado para ver exactamente qué estaba incluido.",next:"scope"},
+                {strategy:"ARGUE",en:"No, that was never included.",es:"No, eso nunca estuvo incluido.",next:"lose"},
+                {strategy:"GIVE IN",en:"Okay, we'll include it.",es:"Vale, lo incluiremos.",next:"weak"}
+            ]
+        },
+        scope:{
+            client:{en:"I don't have the document in front of me.",es:"No tengo el documento delante."},
+            choices:[
+                {strategy:"EVIDENCE",en:"No problem. I'll send the relevant section so we can align on the wording.",es:"No hay problema. Te enviaré la sección relevante para que podamos revisar el texto.",next:"win"},
+                {strategy:"BLAME",en:"Then that's why there's confusion.",es:"Entonces por eso hay confusión.",next:"weak"},
+                {strategy:"ASSUME",en:"I'm sure it wasn't included.",es:"Estoy segura de que no estaba incluido.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Use the agreed documentation to resolve the mismatch.",es:"Utiliza la documentación acordada para resolver la discrepancia."},why:{en:"Evidence keeps the conversation factual instead of personal.",es:"La evidencia mantiene la conversación objetiva en lugar de personal."}},
+        lose:{end:true,success:false,proMove:{en:"Don't argue from memory when documentation exists.",es:"No discutas basándote en la memoria cuando existe documentación."},why:{en:"Certainty without evidence creates unnecessary conflict.",es:"La seguridad sin evidencia crea conflictos innecesarios."}},
+        weak:{end:true,success:false,proMove:{en:"Don't accept new scope before checking the agreement.",es:"No aceptes nuevo alcance antes de comprobar el acuerdo."},why:{en:"Giving in immediately can create a precedent and a delivery problem.",es:"Ceder inmediatamente puede crear un precedente y un problema de entrega."}}
+    }
+},
+
+{
+    category:"CHANGE REQUEST",
+    title:"WE NEED TO CHANGE DIRECTION",
+    titleEs:"TENEMOS QUE CAMBIAR DE DIRECCIÓN",
+    mission:"Adapt without losing control.",
+    pressure:"🔥 HIGH",
+    opening:{en:"We've changed our mind. We need to take this in a different direction.",es:"Hemos cambiado de opinión. Tenemos que llevar esto en otra dirección."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CLARIFY",en:"Understood. What has changed in the business priority?",es:"Entendido. ¿Qué ha cambiado en la prioridad del negocio?",next:"change"},
+                {strategy:"RESIST",en:"But we've already done most of the work.",es:"Pero ya hemos hecho la mayor parte del trabajo.",next:"lose"},
+                {strategy:"AGREE",en:"Okay, we'll change everything.",es:"Vale, cambiaremos todo.",next:"weak"}
+            ]
+        },
+        change:{
+            client:{en:"The launch date has moved forward, so speed matters more now.",es:"La fecha de lanzamiento se ha adelantado, así que ahora la velocidad es más importante."},
+            choices:[
+                {strategy:"REPRIORITISE",en:"Then let's identify what we can remove or simplify to protect the new deadline.",es:"Entonces identifiquemos qué podemos eliminar o simplificar para proteger la nueva fecha.",next:"win"},
+                {strategy:"COMPLAIN",en:"That makes things much harder for us.",es:"Eso nos complica mucho las cosas.",next:"lose"},
+                {strategy:"PROMISE",en:"We'll make it work somehow.",es:"Lo conseguiremos de alguna manera.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Translate the new priority into explicit trade-offs.",es:"Traduce la nueva prioridad en intercambios explícitos."},why:{en:"A changed priority requires a changed plan, not just more effort.",es:"Una prioridad nueva requiere un plan nuevo, no simplemente más esfuerzo."}},
+        lose:{end:true,success:false,proMove:{en:"Don't use previous work as an argument against the new priority.",es:"No utilices el trabajo anterior como argumento contra la nueva prioridad."},why:{en:"The business need has changed, so the conversation must move forward.",es:"La necesidad del negocio ha cambiado, así que la conversación debe avanzar."}},
+        weak:{end:true,success:false,proMove:{en:"Avoid vague promises when the plan has changed materially.",es:"Evita promesas vagas cuando el plan ha cambiado de forma importante."},why:{en:"Confidence needs to be supported by a realistic plan.",es:"La confianza necesita estar respaldada por un plan realista."}}
+    }
+},
+
+{
+    category:"DATA",
+    title:"THE NUMBERS DON'T MATCH",
+    titleEs:"LOS NÚMEROS NO COINCIDEN",
+    mission:"Investigate before explaining.",
+    pressure:"🔥 HIGH",
+    opening:{en:"These numbers don't match what we saw last week.",es:"Estos números no coinciden con lo que vimos la semana pasada."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CHECK",en:"Let's compare the reporting period and data source first.",es:"Comparemos primero el periodo del informe y la fuente de datos.",next:"check"},
+                {strategy:"EXPLAIN",en:"The platform probably changed the way it reports the data.",es:"Probablemente la plataforma cambió la forma de informar de los datos.",next:"lose"},
+                {strategy:"DENY",en:"The numbers are correct on our side.",es:"Los números son correctos por nuestra parte.",next:"weak"}
+            ]
+        },
+        check:{
+            client:{en:"What do you mean by reporting period?",es:"¿Qué quieres decir con periodo del informe?"},
+            choices:[
+                {strategy:"CLARIFY",en:"I'm checking whether we're comparing the same dates and the same attribution model.",es:"Estoy comprobando si estamos comparando las mismas fechas y el mismo modelo de atribución.",next:"win"},
+                {strategy:"VAGUE",en:"There are many technical differences.",es:"Hay muchas diferencias técnicas.",next:"weak"},
+                {strategy:"BLAME",en:"The old report was probably wrong.",es:"Probablemente el informe anterior era incorrecto.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Validate the comparison before interpreting the difference.",es:"Valida la comparación antes de interpretar la diferencia."},why:{en:"Data disagreements are often caused by different definitions, periods or sources.",es:"Las discrepancias de datos suelen deberse a definiciones, periodos o fuentes diferentes."}},
+        lose:{end:true,success:false,proMove:{en:"Don't explain a discrepancy before checking it.",es:"No expliques una discrepancia antes de comprobarla."},why:{en:"A confident but unverified explanation damages credibility.",es:"Una explicación segura pero no verificada daña la credibilidad."}},
+        weak:{end:true,success:false,proMove:{en:"Replace technical vagueness with one specific verification step.",es:"Sustituye la vaguedad técnica por una comprobación concreta."},why:{en:"Specific checks make complex data discussions manageable.",es:"Las comprobaciones concretas hacen manejables las conversaciones complejas sobre datos."}}
+    }
+},
+
+{
+    category:"EMAIL",
+    title:"DID YOU SEE MY EMAIL?",
+    titleEs:"¿VISTE MI EMAIL?",
+    mission:"Respond without sounding defensive.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"Did you see my email? I sent it yesterday.",es:"¿Viste mi email? Lo envié ayer."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"DIRECT",en:"Yes, I saw it. I'm reviewing the details and will reply this afternoon.",es:"Sí, lo vi. Estoy revisando los detalles y responderé esta tarde.",next:"win"},
+                {strategy:"DEFEND",en:"I receive a lot of emails every day.",es:"Recibo muchos emails todos los días.",next:"lose"},
+                {strategy:"IGNORE",en:"I'll check when I get a chance.",es:"Lo revisaré cuando tenga ocasión.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Acknowledge receipt and give a clear next step.",es:"Confirma que lo has recibido y da un siguiente paso claro."},why:{en:"The other person mainly needs certainty that the message has not disappeared.",es:"La otra persona necesita principalmente la certeza de que el mensaje no se ha perdido."}},
+        lose:{end:true,success:false,proMove:{en:"Don't use workload as a defence.",es:"No utilices la carga de trabajo como defensa."},why:{en:"It explains your situation but doesn't solve the communication problem.",es:"Explica tu situación, pero no resuelve el problema de comunicación."}},
+        weak:{end:true,success:false,proMove:{en:"Replace 'when I get a chance' with a timeframe.",es:"Sustituye 'cuando tenga ocasión' por un plazo."},why:{en:"A vague response creates another follow-up.",es:"Una respuesta vaga genera otro seguimiento."}}
+    }
+},
+
+{
+    category:"NEGOTIATION",
+    title:"CAN YOU LOWER THE PRICE?",
+    titleEs:"¿PUEDES BAJAR EL PRECIO?",
+    mission:"Protect value before discussing price.",
+    pressure:"🔥 HIGH",
+    opening:{en:"Can you lower the price? Your competitor is cheaper.",es:"¿Puedes bajar el precio? Tu competidor es más barato."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"VALUE",en:"We can discuss the commercial terms, but first let's compare what is included.",es:"Podemos hablar de las condiciones comerciales, pero primero comparemos qué está incluido.",next:"compare"},
+                {strategy:"DISCOUNT",en:"How much cheaper do you need it to be?",es:"¿Cuánto más barato necesitas que sea?",next:"weak"},
+                {strategy:"DEFEND",en:"We're already giving you a very competitive price.",es:"Ya te estamos dando un precio muy competitivo.",next:"lose"}
+            ]
+        },
+        compare:{
+            client:{en:"They offer a similar service for less.",es:"Ellos ofrecen un servicio similar por menos."},
+            choices:[
+                {strategy:"VALUE",en:"Let's compare deliverables, support and scope before deciding that the offers are equivalent.",es:"Comparemos entregables, soporte y alcance antes de decidir que las ofertas son equivalentes.",next:"win"},
+                {strategy:"ATTACK",en:"Their service probably isn't as good.",es:"Probablemente su servicio no sea tan bueno.",next:"lose"},
+                {strategy:"DISCOUNT",en:"Maybe I can reduce the price slightly.",es:"Quizá pueda reducir un poco el precio.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Compare value before conceding on price.",es:"Compara el valor antes de ceder en el precio."},why:{en:"Price makes more sense when the buyer understands the full value proposition.",es:"El precio tiene más sentido cuando el comprador entiende toda la propuesta de valor."}},
+        lose:{end:true,success:false,proMove:{en:"Don't criticise the competitor without evidence.",es:"No critiques al competidor sin evidencia."},why:{en:"Attacking a competitor makes the conversation less professional.",es:"Atacar a un competidor hace que la conversación sea menos profesional."}},
+        weak:{end:true,success:false,proMove:{en:"Don't negotiate against yourself.",es:"No negocies contra ti misma."},why:{en:"Offering a discount before understanding the objection gives away value unnecessarily.",es:"Ofrecer un descuento antes de entender la objeción cede valor innecesariamente."}}
+    }
+},
+
+{
+    category:"TECHNICAL ISSUE",
+    title:"IT'S NOT WORKING",
+    titleEs:"NO FUNCIONA",
+    mission:"Move from frustration to diagnosis.",
+    pressure:"🔥 HIGH",
+    opening:{en:"The platform isn't working again. This is becoming ridiculous.",es:"La plataforma no funciona otra vez. Esto se está volviendo ridículo."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"DIAGNOSE",en:"I understand the frustration. What exactly is failing right now?",es:"Entiendo la frustración. ¿Qué es exactamente lo que está fallando ahora?",next:"detail"},
+                {strategy:"DEFEND",en:"The platform is working for everyone else.",es:"La plataforma funciona para todos los demás.",next:"lose"},
+                {strategy:"ESCALATE",en:"I'll ask IT to look at it.",es:"Pediré a IT que lo revise.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"Users can't complete the final step.",es:"Los usuarios no pueden completar el último paso."},
+            choices:[
+                {strategy:"ISOLATE",en:"Let's identify whether the issue is affecting all users or only a specific group.",es:"Identifiquemos si el problema afecta a todos los usuarios o solo a un grupo concreto.",next:"win"},
+                {strategy:"GUESS",en:"It sounds like a browser issue.",es:"Parece un problema del navegador.",next:"lose"},
+                {strategy:"PASS",en:"IT will know what to do.",es:"IT sabrá qué hacer.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Diagnose the scope of the problem before proposing a cause.",es:"Diagnostica el alcance del problema antes de proponer una causa."},why:{en:"A precise problem definition accelerates troubleshooting.",es:"Una definición precisa del problema acelera la resolución."}},
+        lose:{end:true,success:false,proMove:{en:"Don't dismiss the problem or guess the cause.",es:"No minimices el problema ni adivines la causa."},why:{en:"Premature explanations create more frustration when they are wrong.",es:"Las explicaciones prematuras generan más frustración cuando son incorrectas."}},
+        weak:{end:true,success:false,proMove:{en:"Take ownership of the next step even when another team will execute it.",es:"Asume el siguiente paso aunque otro equipo vaya a ejecutarlo."},why:{en:"Escalation is stronger when the handoff is clear and owned.",es:"La escalación es más eficaz cuando el traspaso está claro y tiene un responsable."}}
+    }
+},
+
+{
+    category:"MEETING CONFLICT",
+    title:"I DON'T AGREE",
+    titleEs:"NO ESTOY DE ACUERDO",
+    mission:"Disagree without escalating.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I don't agree with that conclusion.",es:"No estoy de acuerdo con esa conclusión."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"EXPLORE",en:"That's fair. Which part of the conclusion do you disagree with?",es:"Es comprensible. ¿Con qué parte de la conclusión no estás de acuerdo?",next:"detail"},
+                {strategy:"PUSH BACK",en:"I think the conclusion is correct.",es:"Creo que la conclusión es correcta.",next:"lose"},
+                {strategy:"RETREAT",en:"Okay, maybe you're right.",es:"Vale, quizá tengas razón.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"I don't think the data supports that interpretation.",es:"No creo que los datos respalden esa interpretación."},
+            choices:[
+                {strategy:"EVIDENCE",en:"Let's look at the specific data point and test both interpretations.",es:"Miremos el dato concreto y comprobemos ambas interpretaciones.",next:"win"},
+                {strategy:"DEFEND",en:"The data clearly supports my view.",es:"Los datos apoyan claramente mi punto de vista.",next:"lose"},
+                {strategy:"DEFER",en:"Let's ask someone else what they think.",es:"Preguntemos a otra persona qué opina.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Turn disagreement into a shared examination of evidence.",es:"Convierte el desacuerdo en un análisis compartido de la evidencia."},why:{en:"You don't need immediate agreement. You need a productive way to test the difference.",es:"No necesitas estar de acuerdo inmediatamente. Necesitas una forma productiva de comprobar la diferencia."}},
+        lose:{end:true,success:false,proMove:{en:"Don't treat disagreement as a challenge to your authority.",es:"No trates el desacuerdo como un desafío a tu autoridad."},why:{en:"Defending your position too early prevents useful discussion.",es:"Defender tu posición demasiado pronto impide una conversación útil."}},
+        weak:{end:true,success:false,proMove:{en:"Don't surrender your position just to avoid tension.",es:"No abandones tu posición simplemente para evitar tensión."},why:{en:"Professional disagreement requires evidence, not avoidance.",es:"El desacuerdo profesional requiere evidencia, no evitación."}}
+    }
+},
+
+{
+    category:"LAST-MINUTE REQUEST",
+    title:"I NEED THIS NOW",
+    titleEs:"NECESITO ESTO AHORA",
+    mission:"Stay useful without accepting impossible timing.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I need this in the next hour. Can you do it?",es:"Necesito esto en la próxima hora. ¿Puedes hacerlo?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"ASSESS",en:"Let me check what is realistically possible in an hour.",es:"Déjame comprobar qué es realmente posible en una hora.",next:"scope"},
+                {strategy:"YES",en:"Yes, absolutely.",es:"Sí, por supuesto.",next:"lose"},
+                {strategy:"NO",en:"No way.",es:"De ninguna manera.",next:"weak"}
+            ]
+        },
+        scope:{
+            client:{en:"I don't need the full version. I just need the key information.",es:"No necesito la versión completa. Solo necesito la información clave."},
+            choices:[
+                {strategy:"NARROW",en:"That changes things. I can give you the key information within the hour.",es:"Eso cambia las cosas. Puedo darte la información clave en una hora.",next:"win"},
+                {strategy:"OVERDO",en:"I'll try to deliver everything anyway.",es:"Intentaré entregar todo de todas formas.",next:"lose"},
+                {strategy:"STALL",en:"I'll see what I can do.",es:"Veré qué puedo hacer.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Reduce scope before reducing quality.",es:"Reduce el alcance antes que la calidad."},why:{en:"A narrower deliverable can satisfy urgency without creating an unrealistic commitment.",es:"Un entregable más limitado puede responder a la urgencia sin crear un compromiso poco realista."}},
+        lose:{end:true,success:false,proMove:{en:"Don't promise the full deliverable when the timeframe is unrealistic.",es:"No prometas el entregable completo cuando el plazo no sea realista."},why:{en:"Pressure should change scope before it changes credibility.",es:"La presión debería cambiar el alcance antes que la credibilidad."}},
+        weak:{end:true,success:false,proMove:{en:"Clarify exactly what is possible.",es:"Aclara exactamente qué es posible."},why:{en:"Uncertainty creates another negotiation instead of a decision.",es:"La incertidumbre crea otra negociación en lugar de una decisión."}}
+    }
+},
+
+{
+    category:"STAKEHOLDER",
+    title:"THE BOSS WANTS IT DIFFERENTLY",
+    titleEs:"EL JEFE LO QUIERE DE OTRA MANERA",
+    mission:"Handle conflicting expectations.",
+    pressure:"🔥 HIGH",
+    opening:{en:"My manager wants this done completely differently.",es:"Mi responsable quiere que esto se haga de una manera completamente diferente."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"ALIGN",en:"Let's understand exactly what needs to change and why.",es:"Entendamos exactamente qué tiene que cambiar y por qué.",next:"detail"},
+                {strategy:"DEFEND",en:"But we already agreed on the current approach.",es:"Pero ya acordamos el enfoque actual.",next:"lose"},
+                {strategy:"FOLLOW",en:"Okay, we'll do whatever your manager wants.",es:"Vale, haremos lo que quiera tu responsable.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"They want a stronger focus on acquisition rather than awareness.",es:"Quiere un mayor enfoque en adquisición en lugar de notoriedad."},
+            choices:[
+                {strategy:"REPRIORITISE",en:"Understood. Let's see which existing elements we can adapt to that priority.",es:"Entendido. Veamos qué elementos existentes podemos adaptar a esa prioridad.",next:"win"},
+                {strategy:"ARGUE",en:"I don't think acquisition should be the priority.",es:"No creo que adquisición deba ser la prioridad.",next:"lose"},
+                {strategy:"ASK",en:"Can you confirm whether that priority is now final?",es:"¿Puedes confirmar si esa prioridad ya es definitiva?",next:"win"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Clarify the new priority before redesigning the work.",es:"Aclara la nueva prioridad antes de rediseñar el trabajo."},why:{en:"You avoid reacting to second-hand instructions without losing momentum.",es:"Evitas reaccionar a instrucciones de segunda mano sin perder impulso."}},
+        lose:{end:true,success:false,proMove:{en:"Don't defend the old plan before understanding the new business need.",es:"No defiendas el plan anterior antes de entender la nueva necesidad del negocio."},why:{en:"Priorities can change legitimately.",es:"Las prioridades pueden cambiar legítimamente."}},
+        weak:{end:true,success:false,proMove:{en:"Don't blindly accept a change you haven't clarified.",es:"No aceptes ciegamente un cambio que no has aclarado."},why:{en:"Unclear authority creates rework and confusion.",es:"Una autoridad poco clara crea trabajo duplicado y confusión."}}
+    }
+},
+
+{
+    category:"PERFORMANCE",
+    title:"THE RESULTS ARE BELOW TARGET",
+    titleEs:"LOS RESULTADOS ESTÁN POR DEBAJO DEL OBJETIVO",
+    mission:"Respond with analysis and action.",
+    pressure:"🔥 HIGH",
+    opening:{en:"We're below target again this month. What is going on?",es:"Estamos por debajo del objetivo otra vez este mes. ¿Qué está pasando?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"ANALYSE",en:"The first thing I'd look at is where the biggest drop happened.",es:"Lo primero que revisaría es dónde se produjo la mayor caída.",next:"detail"},
+                {strategy:"EXCUSE",en:"The market has been difficult.",es:"El mercado ha sido difícil.",next:"lose"},
+                {strategy:"PROMISE",en:"We'll make up for it next month.",es:"Lo compensaremos el mes que viene.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"The biggest drop is in qualified leads.",es:"La mayor caída está en los leads cualificados."},
+            choices:[
+                {strategy:"ACTION",en:"Then I'd review lead quality, targeting and conversion separately.",es:"Entonces revisaría por separado la calidad de los leads, la segmentación y la conversión.",next:"win"},
+                {strategy:"BLAME",en:"The sales team needs to follow up better.",es:"El equipo de ventas tiene que hacer mejor seguimiento.",next:"lose"},
+                {strategy:"WAIT",en:"Let's see what happens next month.",es:"Veamos qué pasa el mes que viene.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Break the result into controllable drivers.",es:"Descompón el resultado en factores controlables."},why:{en:"A target is an outcome. Diagnosis requires understanding the drivers behind it.",es:"Un objetivo es un resultado. El diagnóstico requiere entender los factores que lo generan."}},
+        lose:{end:true,success:false,proMove:{en:"Don't explain poor performance with external factors alone.",es:"No expliques un mal rendimiento solo con factores externos."},why:{en:"External factors may matter, but they don't create an action plan.",es:"Los factores externos pueden importar, pero no crean un plan de acción."}},
+        weak:{end:true,success:false,proMove:{en:"Don't use time as a substitute for analysis.",es:"No utilices el tiempo como sustituto del análisis."},why:{en:"Waiting without learning from the data does not improve the forecast.",es:"Esperar sin aprender de los datos no mejora la previsión."}}
+    }
+},
+
+{
+    category:"COMMUNICATION",
+    title:"YOU DIDN'T KEEP ME UPDATED",
+    titleEs:"NO ME MANTUVISTE INFORMADO",
+    mission:"Repair communication and restore visibility.",
+    pressure:"🔥 HIGH",
+    opening:{en:"You didn't keep me updated. I shouldn't have to chase you for information.",es:"No me mantuviste informado. No debería tener que perseguirte para obtener información."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"OWN",en:"You're right. I should have communicated the change earlier.",es:"Tienes razón. Debería haber comunicado el cambio antes.",next:"repair"},
+                {strategy:"DEFEND",en:"Nothing important had changed, so I didn't think an update was necessary.",es:"No había cambiado nada importante, así que no pensé que fuera necesario informar.",next:"lose"},
+                {strategy:"EXCUSE",en:"I've been very busy with other priorities.",es:"He estado muy ocupada con otras prioridades.",next:"weak"}
+            ]
+        },
+        repair:{
+            client:{en:"What will you do differently next time?",es:"¿Qué harás de forma diferente la próxima vez?"},
+            choices:[
+                {strategy:"PROCESS",en:"I'll flag changes as soon as they affect the timeline or outcome.",es:"Comunicaré los cambios en cuanto afecten al plazo o al resultado.",next:"win"},
+                {strategy:"PROMISE",en:"I'll try to communicate more.",es:"Intentaré comunicarme más.",next:"weak"},
+                {strategy:"OVERDO",en:"I'll send you an update every day.",es:"Te enviaré una actualización todos los días.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Define a communication trigger rather than promising more messages.",es:"Define un criterio de comunicación en lugar de prometer más mensajes."},why:{en:"A clear trigger makes communication predictable without creating unnecessary reporting.",es:"Un criterio claro hace que la comunicación sea predecible sin crear informes innecesarios."}},
+        lose:{end:true,success:false,proMove:{en:"Don't redefine visibility based only on what you consider important.",es:"No definas la visibilidad solo según lo que tú consideras importante."},why:{en:"Stakeholders need information that affects their decisions.",es:"Los stakeholders necesitan información que afecte a sus decisiones."}},
+        weak:{end:true,success:false,proMove:{en:"Don't use busyness as a communication strategy.",es:"No utilices estar ocupada como estrategia de comunicación."},why:{en:"More activity does not automatically mean better visibility.",es:"Más actividad no significa automáticamente mejor visibilidad."}}
+    }
+},
+
+{
+    category:"PROJECT RISK",
+    title:"WE MIGHT MISS THE DEADLINE",
+    titleEs:"PODRÍAMOS NO LLEGAR A LA FECHA",
+    mission:"Raise risk early and propose mitigation.",
+    pressure:"🔥 HIGH",
+    opening:{en:"Are we going to hit the deadline?",es:"¿Vamos a llegar a la fecha límite?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"HONEST",en:"We're at risk, but we still have options to reduce that risk.",es:"Estamos en riesgo, pero todavía tenemos opciones para reducirlo.",next:"risk"},
+                {strategy:"REASSURE",en:"Yes, definitely.",es:"Sí, sin duda.",next:"lose"},
+                {strategy:"AVOID",en:"We're working hard to get there.",es:"Estamos trabajando mucho para conseguirlo.",next:"weak"}
+            ]
+        },
+        risk:{
+            client:{en:"What options do we have?",es:"¿Qué opciones tenemos?"},
+            choices:[
+                {strategy:"MITIGATE",en:"We can reduce scope, add capacity or move the lower-priority work.",es:"Podemos reducir el alcance, añadir capacidad o mover el trabajo de menor prioridad.",next:"win"},
+                {strategy:"PANIC",en:"We need everyone to work harder.",es:"Necesitamos que todo el mundo trabaje más.",next:"lose"},
+                {strategy:"ESCALATE",en:"We need management to decide.",es:"La dirección tiene que decidir.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"State the risk and present concrete mitigation options.",es:"Expón el riesgo y presenta opciones concretas de mitigación."},why:{en:"A risk becomes manageable when decision-makers can choose between clear options.",es:"Un riesgo se vuelve manejable cuando quienes deciden pueden elegir entre opciones claras."}},
+        lose:{end:true,success:false,proMove:{en:"Don't confuse confidence with certainty.",es:"No confundas confianza con certeza."},why:{en:"Unverified reassurance delays decisions and can make the eventual problem worse.",es:"Una tranquilidad no verificada retrasa decisiones y puede empeorar el problema."}},
+        weak:{end:true,success:false,proMove:{en:"Bring options before escalating the decision.",es:"Presenta opciones antes de escalar la decisión."},why:{en:"Escalation is more useful when the decision required is clearly defined.",es:"La escalación es más útil cuando la decisión necesaria está claramente definida."}}
+    }
+},
+
+{
+    category:"CLIENT DEMAND",
+    title:"I WANT AN ANSWER NOW",
+    titleEs:"QUIERO UNA RESPUESTA AHORA",
+    mission:"Stay useful without inventing certainty.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I want an answer now. Don't tell me you'll get back to me later.",es:"Quiero una respuesta ahora. No me digas que volverás a hablar conmigo más tarde."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"PARTIAL",en:"I can give you my current view, but I'll clearly separate what we know from what we still need to verify.",es:"Puedo darte mi opinión actual, pero separaré claramente lo que sabemos de lo que aún tenemos que verificar.",next:"answer"},
+                {strategy:"GUESS",en:"The answer is probably yes.",es:"La respuesta probablemente sea sí.",next:"lose"},
+                {strategy:"REFUSE",en:"I can't answer that yet.",es:"Todavía no puedo responder.",next:"weak"}
+            ]
+        },
+        answer:{
+            client:{en:"Okay. What do you know right now?",es:"Vale. ¿Qué sabes ahora mismo?"},
+            choices:[
+                {strategy:"CLEAR",en:"The current data points to X. We still need to confirm Y before making a final decision.",es:"Los datos actuales apuntan a X. Todavía tenemos que confirmar Y antes de tomar una decisión final.",next:"win"},
+                {strategy:"OVEREXPLAIN",en:"There are many different factors and possibilities.",es:"Hay muchos factores y posibilidades diferentes.",next:"weak"},
+                {strategy:"HEDGE",en:"It's difficult to say.",es:"Es difícil decirlo.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Give the highest-confidence answer available and label the uncertainty.",es:"Da la respuesta con mayor nivel de confianza disponible y señala la incertidumbre."},why:{en:"You remain useful without pretending to know what has not been verified.",es:"Sigues siendo útil sin fingir saber lo que no se ha verificado."}},
+        lose:{end:true,success:false,proMove:{en:"Never guess simply because someone demands certainty.",es:"Nunca adivines simplemente porque alguien exige certeza."},why:{en:"False certainty creates bigger problems later.",es:"La falsa certeza crea problemas mayores después."}},
+        weak:{end:true,success:false,proMove:{en:"Give partial information instead of refusing the whole question.",es:"Da información parcial en lugar de rechazar toda la pregunta."},why:{en:"You can be transparent about uncertainty and still be useful.",es:"Puedes ser transparente sobre la incertidumbre y seguir siendo útil."}}
+    }
+},
+
+{
+    category:"ERROR",
+    title:"WE MADE A MISTAKE",
+    titleEs:"HEMOS COMETIDO UN ERROR",
+    mission:"Own the mistake and contain the impact.",
+    pressure:"🔥 HIGH",
+    opening:{en:"There is a mistake in the campaign setup. What happened?",es:"Hay un error en la configuración de la campaña. ¿Qué ha pasado?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"OWN",en:"We made an error in the setup. I'm checking the impact now.",es:"Hemos cometido un error en la configuración. Estoy comprobando el impacto ahora.",next:"impact"},
+                {strategy:"BLAME",en:"Someone entered the wrong settings.",es:"Alguien introdujo una configuración incorrecta.",next:"lose"},
+                {strategy:"MINIMISE",en:"It's probably not a big issue.",es:"Probablemente no sea un problema importante.",next:"weak"}
+            ]
+        },
+        impact:{
+            client:{en:"How serious is it?",es:"¿Hasta qué punto es grave?"},
+            choices:[
+                {strategy:"ASSESS",en:"I don't want to speculate. I'm checking the affected period and spend first.",es:"No quiero especular. Primero estoy comprobando el periodo y el gasto afectados.",next:"win"},
+                {strategy:"GUESS",en:"It shouldn't be very serious.",es:"No debería ser muy grave.",next:"lose"},
+                {strategy:"PANIC",en:"It could be very serious.",es:"Podría ser muy grave.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Separate what is known from what is still being assessed.",es:"Separa lo que se sabe de lo que todavía se está evaluando."},why:{en:"Good incident communication combines ownership, facts and controlled investigation.",es:"Una buena comunicación ante un incidente combina responsabilidad, hechos e investigación controlada."}},
+        lose:{end:true,success:false,proMove:{en:"Don't turn an incident into a blame exercise.",es:"No conviertas un incidente en una búsqueda de culpables."},why:{en:"The immediate priority is impact and recovery, not assigning blame.",es:"La prioridad inmediata es el impacto y la recuperación, no asignar culpas."}},
+        weak:{end:true,success:false,proMove:{en:"Don't minimise or dramatise before checking the facts.",es:"No minimices ni dramatices antes de comprobar los hechos."},why:{en:"Both extremes reduce confidence in your communication.",es:"Ambos extremos reducen la confianza en tu comunicación."}}
+    }
+},
+
+{
+    category:"RESOURCE PRESSURE",
+    title:"WE NEED MORE PEOPLE",
+    titleEs:"NECESITAMOS MÁS PERSONAS",
+    mission:"Justify resource needs with evidence.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"Why do you need another person on the project?",es:"¿Por qué necesitas otra persona en el proyecto?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"EVIDENCE",en:"The current workload creates a capacity gap against the deadline.",es:"La carga actual crea un déficit de capacidad respecto a la fecha límite.",next:"detail"},
+                {strategy:"REQUEST",en:"Because the team is overloaded.",es:"Porque el equipo está sobrecargado.",next:"weak"},
+                {strategy:"COMPLAIN",en:"We're already doing too much.",es:"Ya estamos haciendo demasiado.",next:"lose"}
+            ]
+        },
+        detail:{
+            client:{en:"What exactly is creating the gap?",es:"¿Qué está creando exactamente ese déficit?"},
+            choices:[
+                {strategy:"QUANTIFY",en:"We have two additional deliverables and only five working days left.",es:"Tenemos dos entregables adicionales y solo quedan cinco días laborables.",next:"win"},
+                {strategy:"VAGUE",en:"There is simply too much work.",es:"Simplemente hay demasiado trabajo.",next:"weak"},
+                {strategy:"ESCALATE",en:"Management needs to decide whether to add capacity.",es:"La dirección tiene que decidir si añade capacidad.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Quantify the gap between workload, capacity and deadline.",es:"Cuantifica la diferencia entre carga, capacidad y plazo."},why:{en:"Resource requests become stronger when they are based on measurable constraints.",es:"Las peticiones de recursos son más sólidas cuando se basan en limitaciones medibles."}},
+        lose:{end:true,success:false,proMove:{en:"Don't turn resource planning into an emotional complaint.",es:"No conviertas la planificación de recursos en una queja emocional."},why:{en:"Decision-makers need evidence to allocate capacity.",es:"Quienes toman decisiones necesitan evidencia para asignar capacidad."}},
+        weak:{end:true,success:false,proMove:{en:"Bring the evidence needed for the decision.",es:"Aporta la evidencia necesaria para tomar la decisión."},why:{en:"Escalating without context simply moves the uncertainty upward.",es:"Escalar sin contexto simplemente traslada la incertidumbre hacia arriba."}}
+    }
+},
+
+{
+    category:"CLIENT COMPARISON",
+    title:"YOUR COMPETITOR DID IT FASTER",
+    titleEs:"TU COMPETIDOR LO HIZO MÁS RÁPIDO",
+    mission:"Respond without attacking the competitor.",
+    pressure:"🔥 HIGH",
+    opening:{en:"Your competitor delivered this much faster than you.",es:"Tu competidor entregó esto mucho más rápido que vosotros."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"EXPLORE",en:"That's useful context. Let's compare what was delivered and under what conditions.",es:"Es un contexto útil. Comparemos qué se entregó y en qué condiciones.",next:"compare"},
+                {strategy:"ATTACK",en:"They probably cut corners.",es:"Probablemente se saltaron pasos.",next:"lose"},
+                {strategy:"DEFEND",en:"We take more time because our quality is higher.",es:"Tardamos más porque nuestra calidad es mayor.",next:"weak"}
+            ]
+        },
+        compare:{
+            client:{en:"They delivered the core functionality only.",es:"Ellos entregaron solo la funcionalidad principal."},
+            choices:[
+                {strategy:"TRADEOFF",en:"That explains part of the difference. We can also deliver the core version first if speed is the priority.",es:"Eso explica parte de la diferencia. También podemos entregar primero la versión principal si la velocidad es la prioridad.",next:"win"},
+                {strategy:"DEFEND",en:"We prefer to deliver the complete solution.",es:"Preferimos entregar la solución completa.",next:"weak"},
+                {strategy:"DISMISS",en:"Then it's not a fair comparison.",es:"Entonces no es una comparación justa.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Identify the trade-off instead of arguing about who is better.",es:"Identifica el intercambio en lugar de discutir quién es mejor."},why:{en:"A trade-off gives the client a choice instead of forcing a defensive comparison.",es:"Un intercambio ofrece al cliente una elección en lugar de forzar una comparación defensiva."}},
+        lose:{end:true,success:false,proMove:{en:"Don't attack a competitor to defend your own position.",es:"No ataques a un competidor para defender tu posición."},why:{en:"Competitor criticism rarely strengthens your credibility.",es:"Criticar al competidor rara vez fortalece tu credibilidad."}},
+        weak:{end:true,success:false,proMove:{en:"Make the trade-off explicit instead of declaring your approach superior.",es:"Haz explícito el intercambio en lugar de declarar superior tu enfoque."},why:{en:"Different delivery models can be valid depending on the priority.",es:"Diferentes modelos de entrega pueden ser válidos según la prioridad."}}
+    }
+},
+
+{
+    category:"APPROVAL",
+    title:"I NEED THIS APPROVED TODAY",
+    titleEs:"NECESITO QUE ESTO SE APRUEBE HOY",
+    mission:"Create a decision path.",
+    pressure:"🔥 HIGH",
+    opening:{en:"I need this approved today. Can you make sure it happens?",es:"Necesito que esto se apruebe hoy. ¿Puedes asegurarte de que ocurra?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"MAP",en:"I'll confirm who needs to approve it and what they need to make the decision.",es:"Confirmaré quién tiene que aprobarlo y qué necesita para tomar la decisión.",next:"map"},
+                {strategy:"PROMISE",en:"Yes, I'll get it approved today.",es:"Sí, conseguiré que se apruebe hoy.",next:"lose"},
+                {strategy:"PASS",en:"That's up to the approver.",es:"Eso depende de quien lo apruebe.",next:"weak"}
+            ]
+        },
+        map:{
+            client:{en:"The marketing director needs to approve the final version.",es:"El director de marketing tiene que aprobar la versión final."},
+            choices:[
+                {strategy:"ACTION",en:"I'll send the final version with the key decision points clearly highlighted.",es:"Enviaré la versión final con los puntos clave de decisión claramente destacados.",next:"win"},
+                {strategy:"WAIT",en:"Then we'll have to wait for them.",es:"Entonces tendremos que esperar.",next:"weak"},
+                {strategy:"PRESSURE",en:"I'll tell them they have to approve it today.",es:"Les diré que tienen que aprobarlo hoy.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Control the preparation, not another person's decision.",es:"Controla la preparación, no la decisión de otra persona."},why:{en:"You can improve the conditions for a decision without pretending to control the outcome.",es:"Puedes mejorar las condiciones para una decisión sin fingir que controlas el resultado."}},
+        lose:{end:true,success:false,proMove:{en:"Don't promise another person's decision.",es:"No prometas la decisión de otra persona."},why:{en:"Credibility drops when you commit to something outside your control.",es:"La credibilidad disminuye cuando te comprometes con algo que no controlas."}},
+        weak:{end:true,success:false,proMove:{en:"Own the preparation even when approval belongs to someone else.",es:"Asume la preparación aunque la aprobación corresponda a otra persona."},why:{en:"Clear preparation reduces decision friction.",es:"Una preparación clara reduce la fricción en la decisión."}}
+    }
+},
+
+{
+    category:"MISSING INFORMATION",
+    title:"WE'RE MISSING SOMETHING",
+    titleEs:"NOS FALTA ALGO",
+    mission:"Ask for what is needed without blaming.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"We can't move forward. Something is missing.",es:"No podemos avanzar. Falta algo."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"IDENTIFY",en:"Let's identify exactly what information is missing.",es:"Identifiquemos exactamente qué información falta.",next:"detail"},
+                {strategy:"BLAME",en:"Someone should have provided it already.",es:"Alguien debería haberlo proporcionado ya.",next:"lose"},
+                {strategy:"GUESS",en:"We can probably work without it.",es:"Probablemente podamos trabajar sin ello.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"We don't have the final audience list.",es:"No tenemos la lista final de audiencia."},
+            choices:[
+                {strategy:"ACTION",en:"I'll confirm who owns the list and what we need to unblock the work.",es:"Confirmaré quién es responsable de la lista y qué necesitamos para desbloquear el trabajo.",next:"win"},
+                {strategy:"BLAME",en:"The client should have sent that earlier.",es:"El cliente debería haberla enviado antes.",next:"lose"},
+                {strategy:"WAIT",en:"Let's wait until we receive it.",es:"Esperemos hasta recibirla.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Identify the missing input, owner and unblock condition.",es:"Identifica el dato que falta, el responsable y la condición para desbloquearlo."},why:{en:"Missing information becomes manageable when ownership and next action are clear.",es:"La información que falta se vuelve manejable cuando la responsabilidad y la acción siguiente están claras."}},
+        lose:{end:true,success:false,proMove:{en:"Don't waste time assigning blame.",es:"No pierdas tiempo asignando culpas."},why:{en:"The missing input still needs to be obtained.",es:"El dato que falta sigue teniendo que conseguirse."}},
+        weak:{end:true,success:false,proMove:{en:"Don't wait passively when you can identify the blocker.",es:"No esperes pasivamente cuando puedes identificar el bloqueo."},why:{en:"Waiting without ownership increases delay.",es:"Esperar sin responsabilidad aumenta el retraso."}}
+    }
+},
+
+{
+    category:"PRIORITY CONFLICT",
+    title:"WHICH ONE COMES FIRST?",
+    titleEs:"¿CUÁL VA PRIMERO?",
+    mission:"Resolve competing priorities.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"Both teams say their request is the priority. Which one do we do first?",es:"Los dos equipos dicen que su petición es prioritaria. ¿Cuál hacemos primero?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"CRITERIA",en:"Let's compare them against business impact and deadline risk.",es:"Comparemos ambas según el impacto empresarial y el riesgo para el plazo.",next:"criteria"},
+                {strategy:"GUESS",en:"I'd probably do the first one.",es:"Probablemente haría la primera.",next:"lose"},
+                {strategy:"PASS",en:"They need to decide between themselves.",es:"Tienen que decidirlo entre ellos.",next:"weak"}
+            ]
+        },
+        criteria:{
+            client:{en:"The first affects revenue. The second affects internal efficiency.",es:"La primera afecta a los ingresos. La segunda afecta a la eficiencia interna."},
+            choices:[
+                {strategy:"DECIDE",en:"Based on that, I'd prioritise the revenue impact and schedule the efficiency work next.",es:"Con esos criterios, priorizaría el impacto en ingresos y programaría después el trabajo de eficiencia.",next:"win"},
+                {strategy:"AVOID",en:"Both are important, so it's difficult to choose.",es:"Ambas son importantes, así que es difícil elegir.",next:"weak"},
+                {strategy:"ESCALATE",en:"Let's ask management which one they prefer.",es:"Preguntemos a la dirección cuál prefiere.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Use explicit criteria to make competing priorities comparable.",es:"Utiliza criterios explícitos para hacer comparables las prioridades."},why:{en:"A priority decision becomes easier when it is based on shared criteria.",es:"Una decisión de prioridad es más fácil cuando se basa en criterios compartidos."}},
+        lose:{end:true,success:false,proMove:{en:"Don't choose based on order or instinct.",es:"No elijas basándote en el orden o el instinto."},why:{en:"A priority without criteria quickly becomes political.",es:"Una prioridad sin criterios se convierte rápidamente en una cuestión política."}},
+        weak:{end:true,success:false,proMove:{en:"Don't escalate a decision that can be made with clear criteria.",es:"No escales una decisión que puede tomarse con criterios claros."},why:{en:"Good prioritisation reduces unnecessary escalation.",es:"Una buena priorización reduce la escalación innecesaria."}}
+    }
+},
+
+{
+    category:"CLIENT EXPECTATION",
+    title:"THIS SHOULD HAVE BEEN DONE ALREADY",
+    titleEs:"ESTO YA DEBERÍA ESTAR HECHO",
+    mission:"Respond to frustration with facts and action.",
+    pressure:"🔥 HIGH",
+    opening:{en:"This should have been done already. Why is it still pending?",es:"Esto ya debería estar hecho. ¿Por qué sigue pendiente?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"FACTS",en:"It's pending because we are waiting for the final approval.",es:"Está pendiente porque estamos esperando la aprobación final.",next:"approval"},
+                {strategy:"DEFEND",en:"We've been working on it all week.",es:"Llevamos toda la semana trabajando en ello.",next:"weak"},
+                {strategy:"BLAME",en:"The delay is on the approval side.",es:"El retraso está en la parte de aprobación.",next:"lose"}
+            ]
+        },
+        approval:{
+            client:{en:"Can you get that approval today?",es:"¿Puedes conseguir esa aprobación hoy?"},
+            choices:[
+                {strategy:"ACTION",en:"I'll follow up now and confirm the expected approval time.",es:"Haré seguimiento ahora y confirmaré el plazo previsto para la aprobación.",next:"win"},
+                {strategy:"PROMISE",en:"Yes, I'll get it approved today.",es:"Sí, conseguiré que se apruebe hoy.",next:"lose"},
+                {strategy:"WAIT",en:"We'll have to wait and see.",es:"Tendremos que esperar y ver qué pasa.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Explain the blocker and own the next action.",es:"Explica el bloqueo y asume la siguiente acción."},why:{en:"This separates the cause of the delay from what you can control now.",es:"Esto separa la causa del retraso de lo que puedes controlar ahora."}},
+        lose:{end:true,success:false,proMove:{en:"Don't turn a blocker into a blame statement.",es:"No conviertas un bloqueo en una acusación."},why:{en:"The client needs progress, not responsibility disputes.",es:"El cliente necesita avances, no disputas sobre responsabilidades."}},
+        weak:{end:true,success:false,proMove:{en:"Replace effort statements with status and next action.",es:"Sustituye las explicaciones sobre esfuerzo por estado y siguiente acción."},why:{en:"Being busy does not answer whether the work will move forward.",es:"Estar ocupado no responde a si el trabajo avanzará."}}
+    }
+},
+
+{
+    category:"NEGATIVE FEEDBACK",
+    title:"THE CLIENT HATED IT",
+    titleEs:"AL CLIENTE NO LE GUSTÓ NADA",
+    mission:"Extract useful feedback from an emotional reaction.",
+    pressure:"🔥 HIGH",
+    opening:{en:"The client hated the proposal. They said it completely missed the mark.",es:"Al cliente no le gustó nada la propuesta. Dijo que no daba en el clavo."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"DIAGNOSE",en:"What specifically did they feel was missing?",es:"¿Qué sintieron exactamente que faltaba?",next:"detail"},
+                {strategy:"DEFEND",en:"I don't understand why. The proposal was strong.",es:"No entiendo por qué. La propuesta era buena.",next:"lose"},
+                {strategy:"PANIC",en:"Then we need to start again from scratch.",es:"Entonces tenemos que empezar de cero.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"They said the proposal focused too much on features and not enough on business outcomes.",es:"Dijeron que la propuesta se centraba demasiado en funcionalidades y no suficiente en resultados de negocio."},
+            choices:[
+                {strategy:"REFOCUS",en:"That's clear. We'll reframe the proposal around the business outcomes first.",es:"Eso está claro. Reformularemos la propuesta empezando por los resultados de negocio.",next:"win"},
+                {strategy:"DEFEND",en:"But the features are important too.",es:"Pero las funcionalidades también son importantes.",next:"lose"},
+                {strategy:"OVERREACT",en:"We'll remove all the features.",es:"Eliminaremos todas las funcionalidades.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Translate emotional feedback into a specific messaging change.",es:"Convierte el feedback emocional en un cambio concreto de mensaje."},why:{en:"The useful part of negative feedback is usually hidden inside the general reaction.",es:"La parte útil del feedback negativo suele estar dentro de la reacción general."}},
+        lose:{end:true,success:false,proMove:{en:"Don't defend the work before understanding the client's perspective.",es:"No defiendas el trabajo antes de entender la perspectiva del cliente."},why:{en:"The goal is to improve the proposal, not win an argument.",es:"El objetivo es mejorar la propuesta, no ganar una discusión."}},
+        weak:{end:true,success:false,proMove:{en:"Fix the specific problem instead of destroying the whole solution.",es:"Corrige el problema concreto en lugar de destruir toda la solución."},why:{en:"Overreaction wastes good work and can create a new problem.",es:"Una reacción exagerada desperdicia trabajo útil y puede crear un problema nuevo."}}
+    }
+},
+
+{
+    category:"TEAM CONFLICT",
+    title:"THEY KEEP BLOCKING US",
+    titleEs:"SIGUEN BLOQUEÁNDONOS",
+    mission:"Move team conflict toward resolution.",
+    pressure:"🔥 HIGH",
+    opening:{en:"That team keeps blocking us. We can't work like this.",es:"Ese equipo sigue bloqueándonos. No podemos trabajar así."},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"FACTS",en:"Let's identify exactly what they are blocking and what we need from them.",es:"Identifiquemos exactamente qué están bloqueando y qué necesitamos de ellos.",next:"detail"},
+                {strategy:"BLAME",en:"They're always difficult to work with.",es:"Siempre es difícil trabajar con ellos.",next:"lose"},
+                {strategy:"ESCALATE",en:"I'll complain to their manager.",es:"Me quejaré a su responsable.",next:"weak"}
+            ]
+        },
+        detail:{
+            client:{en:"We need their final data before we can launch.",es:"Necesitamos sus datos finales antes de poder lanzar."},
+            choices:[
+                {strategy:"OWNER",en:"Let's confirm the data owner and the exact delivery time we need.",es:"Confirmemos quién es responsable de los datos y exactamente cuándo los necesitamos.",next:"win"},
+                {strategy:"PRESSURE",en:"I'll tell them they have to send it immediately.",es:"Les diré que tienen que enviarlo inmediatamente.",next:"weak"},
+                {strategy:"BLAME",en:"They should have done it already.",es:"Deberían haberlo hecho ya.",next:"lose"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Replace interpersonal frustration with a concrete dependency.",es:"Sustituye la frustración interpersonal por una dependencia concreta."},why:{en:"Specific dependencies are easier to resolve than general team conflict.",es:"Las dependencias concretas son más fáciles de resolver que los conflictos generales entre equipos."}},
+        lose:{end:true,success:false,proMove:{en:"Don't generalise about another team.",es:"No generalices sobre otro equipo."},why:{en:"Generalisation creates conflict without identifying the blocker.",es:"Generalizar crea conflicto sin identificar el bloqueo."}},
+        weak:{end:true,success:false,proMove:{en:"Escalate with facts and a defined decision, not frustration.",es:"Escala con hechos y una decisión definida, no con frustración."},why:{en:"Escalation works when the problem and required intervention are clear.",es:"La escalación funciona cuando el problema y la intervención necesaria están claros."}}
+    }
+},
+
+{
+    category:"QUALITY",
+    title:"CAN WE SKIP THE CHECK?",
+    titleEs:"¿PODEMOS SALTARNOS LA COMPROBACIÓN?",
+    mission:"Protect quality without blocking progress.",
+    pressure:"⚡ MEDIUM",
+    opening:{en:"We're running late. Can we skip the final quality check?",es:"Vamos tarde. ¿Podemos saltarnos la comprobación final de calidad?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"RISK",en:"We can reduce the check, but I wouldn't remove it completely.",es:"Podemos reducir la comprobación, pero no la eliminaría por completo.",next:"risk"},
+                {strategy:"YES",en:"Sure, let's skip it.",es:"Claro, saltémosla.",next:"lose"},
+                {strategy:"NO",en:"Absolutely not.",es:"En absoluto.",next:"weak"}
+            ]
+        },
+        risk:{
+            client:{en:"What would a reduced check look like?",es:"¿Cómo sería una comprobación reducida?"},
+            choices:[
+                {strategy:"FOCUS",en:"We can check the highest-risk elements and leave the low-risk items for later.",es:"Podemos comprobar los elementos de mayor riesgo y dejar los de bajo riesgo para después.",next:"win"},
+                {strategy:"VAGUE",en:"We'll just do a quick check.",es:"Simplemente haremos una comprobación rápida.",next:"weak"},
+                {strategy:"REFUSE",en:"Quality can't be compromised.",es:"La calidad no puede comprometerse.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Reduce quality scope intelligently instead of removing quality control.",es:"Reduce inteligentemente el alcance del control de calidad en lugar de eliminarlo."},why:{en:"Risk-based checking protects the critical parts when time is limited.",es:"Un control basado en riesgo protege las partes críticas cuando el tiempo es limitado."}},
+        lose:{end:true,success:false,proMove:{en:"Don't trade essential quality control for speed without assessing risk.",es:"No cambies un control de calidad esencial por velocidad sin evaluar el riesgo."},why:{en:"A missed check can create a larger delay later.",es:"Una comprobación omitida puede crear un retraso mayor después."}},
+        weak:{end:true,success:false,proMove:{en:"Explain the risk instead of using an absolute refusal.",es:"Explica el riesgo en lugar de utilizar una negativa absoluta."},why:{en:"Professional judgement balances quality and urgency.",es:"El criterio profesional equilibra calidad y urgencia."}}
+    }
+},
+
+{
+    category:"FINAL TRIGGER",
+    title:"THE ULTIMATE PRESSURE TEST",
+    titleEs:"LA PRUEBA DEFINITIVA DE PRESIÓN",
+    mission:"Stay calm, clear and useful under pressure.",
+    pressure:"🔥🔥 EXTREME",
+    opening:{en:"We're late, the client is unhappy, the numbers are weak and management wants an answer now. What are you going to do?",es:"Vamos tarde, el cliente está descontento, los números son malos y la dirección quiere una respuesta ahora. ¿Qué vas a hacer?"},
+    nodes:{
+        start:{
+            choices:[
+                {strategy:"STRUCTURE",en:"First I'll separate the facts from the assumptions, then identify the highest-impact action.",es:"Primero separaré los hechos de las suposiciones y después identificaré la acción de mayor impacto.",next:"pressure"},
+                {strategy:"PANIC",en:"We need to fix everything immediately.",es:"Tenemos que arreglarlo todo inmediatamente.",next:"lose"},
+                {strategy:"DEFEND",en:"A lot of these problems aren't actually our fault.",es:"Muchos de estos problemas no son realmente culpa nuestra.",next:"weak"}
+            ]
+        },
+        pressure:{
+            client:{en:"Fine. What's the first thing you need to know?",es:"Bien. ¿Qué es lo primero que necesitas saber?"},
+            choices:[
+                {strategy:"DIAGNOSE",en:"I need the current performance data, the confirmed deadline and the critical client requirement.",es:"Necesito los datos actuales de rendimiento, la fecha límite confirmada y el requisito crítico del cliente.",next:"final"},
+                {strategy:"VAGUE",en:"I need more information before deciding.",es:"Necesito más información antes de decidir.",next:"weak"},
+                {strategy:"ACTION",en:"I'll start changing the campaign immediately.",es:"Empezaré a cambiar la campaña inmediatamente.",next:"weak"}
+            ]
+        },
+        final:{
+            client:{en:"And then?",es:"¿Y después?"},
+            choices:[
+                {strategy:"CONTROL",en:"Then I'll propose one realistic recovery plan with clear owners, priorities and deadlines.",es:"Después propondré un plan de recuperación realista con responsables, prioridades y plazos claros.",next:"win"},
+                {strategy:"PROMISE",en:"Then I'll make sure everything gets fixed.",es:"Después me aseguraré de que todo se arregle.",next:"lose"},
+                {strategy:"ESCALATE",en:"Then I'll ask management what they want us to do.",es:"Después preguntaré a la dirección qué quiere que hagamos.",next:"weak"}
+            ]
+        },
+        win:{end:true,success:true,proMove:{en:"Structure pressure into facts, priorities, ownership and action.",es:"Convierte la presión en hechos, prioridades, responsabilidades y acción."},why:{en:"This is the core Trigger Fighter skill: you don't need to remove pressure. You need to operate effectively inside it.",es:"Esta es la habilidad central de Trigger Fighter: no necesitas eliminar la presión. Necesitas funcionar eficazmente dentro de ella."}},
+        lose:{end:true,success:false,proMove:{en:"Don't respond to pressure with another unrealistic promise.",es:"No respondas a la presión con otra promesa poco realista."},why:{en:"Pressure makes vague certainty tempting, but credibility depends on control and evidence.",es:"La presión hace tentadora la falsa certeza, pero la credibilidad depende del control y la evidencia."}},
+        weak:{end:true,success:false,proMove:{en:"Don't wait for perfect information before identifying the first useful decision.",es:"No esperes a tener información perfecta antes de identificar la primera decisión útil."},why:{en:"Strong professionals create progress even when the situation is incomplete.",es:"Los profesionales sólidos generan avances incluso cuando la situación es incompleta."}}
+    }
+}
+
+];
+
+
+/* =========================================================
+   ENGINE
+========================================================= */
+
+let currentTrigger = 0;
+let currentNode = "start";
+let conversationPath = [];
+let currentLevel = "react";
+const defeatedTriggers = new Set();
+let renderToken = 0;
+
+const typewriterSpeed = 22;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const categoryEl =
+    document.getElementById("category");
+
+const titleEl =
+    document.getElementById("triggerTitle");
+
+const titleEsEl =
+    document.getElementById("triggerTitleEs");
+
+const missionEl =
+    document.getElementById("mission");
+
+const pressureEl =
+    document.getElementById("pressure");
+
+const chatEl =
+    document.getElementById("chat");
+
+const choicesEl =
+    document.getElementById("choices");
+
+const responseArea =
+    document.getElementById("responseArea");
+
+const outcomeEl =
+    document.getElementById("outcome");
+
+const outcomeStatusEl =
+    document.getElementById("outcomeStatus");
+
+const outcomeStatusEsEl =
+    document.getElementById("outcomeStatusEs");
+
+const pathEl =
+    document.getElementById("path");
+
+const proMoveEnEl =
+    document.getElementById("proMoveEn");
+
+const proMoveEsEl =
+    document.getElementById("proMoveEs");
+
+const whyWorksEnEl =
+    document.getElementById("whyWorksEn");
+
+const whyWorksEsEl =
+    document.getElementById("whyWorksEs");
+
+const thinkingEl =
+    document.getElementById("thinking");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+const progressLabel =
+    document.getElementById("progressLabel");
+
+const progressPercent =
+    document.getElementById("progressPercent");
+
+const previousBtn =
+    document.getElementById("previousBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const restartBtn =
+    document.getElementById("restartBtn");
+
+
+/* =========================================================
+   INITIALISE
+========================================================= */
+
+function init() {
+    updateLevelButtons();
+
+    loadTrigger(currentTrigger);
+}
+
+
+/* =========================================================
+   LOAD TRIGGER
+========================================================= */
+
+function loadTrigger(index) {
+
+    renderToken += 1;
+
+    const token =
+        renderToken;
+
+    currentTrigger = index;
+
+    const trigger =
+        triggers[index];
+
+    currentNode = "start";
+
+    conversationPath = [];
+
+    categoryEl.textContent =
+        trigger.category;
+
+    titleEl.textContent =
+        trigger.title;
+
+    titleEsEl.textContent =
+        trigger.titleEs;
+
+    missionEl.textContent =
+        trigger.mission;
+
+    pressureEl.textContent =
+        trigger.pressure;
+
+    chatEl.innerHTML = "";
+
+    choicesEl.innerHTML = "";
+
+    responseArea.classList.remove(
+        "awaiting-response"
+    );
+
+    outcomeEl.classList.remove(
+        "show",
+        "failed"
+    );
+
+    responseArea.style.display =
+        "block";
+
+    updateProgress();
+
+    addMessage(
+        "client",
+        trigger.opening,
+        {
+            typewriter: true,
+            token
+        }
+    ).then(done => {
+
+        if (done && token === renderToken) {
+
+            showChoices();
+
+        }
+
+    });
+
+    previousBtn.disabled =
+        currentTrigger === 0;
+
+    nextBtn.disabled =
+        currentTrigger === triggers.length - 1;
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress() {
+
+    const number =
+        currentTrigger + 1;
+
+    const percent =
+        Math.round(
+            number / triggers.length * 100
+        );
+
+    progressLabel.textContent =
+        `TRIGGER ${number} OF ${triggers.length}`;
+
+    progressPercent.textContent =
+        `${percent}%`;
+
+    progressBar.style.width =
+        `${percent}%`;
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+========================================================= */
+
+function typeText(element, text, token) {
+
+    return new Promise(resolve => {
+
+        let index =
+            0;
+
+        function writeNextCharacter() {
+
+            if (token !== renderToken) {
+
+                resolve(false);
+
+                return;
+            }
+
+            element.textContent =
+                text.slice(0, index);
+
+            if (index >= text.length) {
+
+                resolve(true);
+
+                return;
+            }
+
+            index += 1;
+
+            setTimeout(
+                writeNextCharacter,
+                typewriterSpeed
+            );
+        }
+
+        writeNextCharacter();
+
+    });
+}
+
+
+function wait(duration) {
+
+    return new Promise(resolve => {
+
+        setTimeout(
+            resolve,
+            duration
+        );
+
+    });
+}
+
+
+async function addMessage(type, message, options = {}) {
+
+    const useTypewriter =
+        options.typewriter === true;
+
+    const token =
+        options.token || renderToken;
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        `message ${type}`;
+
+    const label =
+        document.createElement("div");
+
+    label.className =
+        "message-label";
+
+    label.textContent =
+        type === "client"
+            ? "CLIENT"
+            : "YOU";
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.className =
+        "bubble";
+
+    const en =
+        document.createElement("span");
+
+    en.className =
+        "en";
+
+    en.textContent =
+        useTypewriter ? "" : message.en;
+
+    const es =
+        document.createElement("span");
+
+    es.className =
+        "es";
+
+    es.textContent =
+        useTypewriter ? "" : message.es;
+
+    bubble.appendChild(en);
+
+    bubble.appendChild(es);
+
+    wrapper.appendChild(label);
+
+    wrapper.appendChild(bubble);
+
+    chatEl.appendChild(wrapper);
+
+    setTimeout(() => {
+
+        wrapper.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    }, 60);
+
+    if (!useTypewriter) {
+
+        return true;
+    }
+
+    const enDone =
+        await typeText(
+            en,
+            message.en,
+            token
+        );
+
+    if (!enDone) {
+
+        return false;
+    }
+
+    await wait(140);
+
+    const esDone =
+        await typeText(
+            es,
+            message.es,
+            token
+        );
+
+    return esDone;
+}
+
+
+/* =========================================================
+   SHOW CHOICES
+========================================================= */
+
+function showChoices() {
+
+    const trigger =
+        triggers[currentTrigger];
+
+    const node =
+        trigger.nodes[currentNode];
+
+    choicesEl.innerHTML = "";
+
+    if (!node || node.end) {
+
+        finishScenario(node);
+
+        return;
+    }
+
+    node.choices.forEach(choice => {
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "choice";
+
+        button.innerHTML = `
+            <span class="choice-strategy">
+                ${choice.strategy}
+            </span>
+
+            <span class="choice-en">
+                ${choice.en}
+            </span>
+
+            <span class="choice-es">
+                ${choice.es}
+            </span>
+        `;
+
+        button.addEventListener(
+            "click",
+            () => chooseResponse(choice)
+        );
+
+        choicesEl.appendChild(button);
+    });
+
+    setTimeout(() => {
+
+        responseArea.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }, 80);
+
+    responseArea.classList.remove(
+        "awaiting-response"
+    );
+
+    setTimeout(() => {
+
+        void responseArea.offsetWidth;
+
+        responseArea.classList.add(
+            "awaiting-response"
+        );
+
+    }, 380);
+}
+
+
+/* =========================================================
+   CHOOSE RESPONSE
+========================================================= */
+
+function chooseResponse(choice) {
+
+    document
+        .querySelectorAll(".choice")
+        .forEach(button => {
+
+            button.disabled = true;
+
+        });
+
+    choicesEl.innerHTML = "";
+
+    responseArea.classList.remove(
+        "awaiting-response"
+    );
+
+    conversationPath.push({
+        strategy: choice.strategy,
+        en: choice.en,
+        es: choice.es
+    });
+
+    addMessage(
+        "you",
+        {
+            en: choice.en,
+            es: choice.es
+        }
+    );
+
+    thinkingEl.classList.add("show");
+
+    setTimeout(() => {
+
+        thinkingEl.classList.remove("show");
+
+        const trigger =
+            triggers[currentTrigger];
+
+        const nextNode =
+            trigger.nodes[choice.next];
+
+        currentNode =
+            choice.next;
+
+        if (nextNode.end) {
+
+            finishScenario(nextNode);
+
+        } else {
+
+            const token =
+                renderToken;
+
+            addMessage(
+                "client",
+                nextNode.client,
+                {
+                    typewriter: true,
+                    token
+                }
+            ).then(done => {
+
+                if (done && token === renderToken) {
+
+                    showChoices();
+
+                }
+
+            });
+
+        }
+
+    }, 650);
+}
+
+
+/* =========================================================
+   FINISH
+========================================================= */
+
+function finishScenario(node) {
+
+    choicesEl.innerHTML = "";
+
+    responseArea.style.display =
+        "none";
+
+    responseArea.classList.remove(
+        "awaiting-response"
+    );
+
+    outcomeEl.classList.add("show");
+
+    if (node.success) {
+
+        defeatedTriggers.add(currentTrigger);
+
+        updateLevelButtons();
+
+        outcomeEl.classList.remove(
+            "failed"
+        );
+
+        outcomeStatusEl.textContent =
+            "TRIGGER DEFEATED";
+
+        outcomeStatusEsEl.textContent =
+            "TRIGGER SUPERADO";
+
+    } else {
+
+        outcomeEl.classList.add(
+            "failed"
+        );
+
+        outcomeStatusEl.textContent =
+            "TRIGGER GOT THE BETTER OF YOU";
+
+        outcomeStatusEsEl.textContent =
+            "EL TRIGGER TE SUPERÓ";
+    }
+
+    pathEl.innerHTML = "";
+
+    conversationPath.forEach(step => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "path-item";
+
+        item.textContent =
+            step.strategy;
+
+        pathEl.appendChild(item);
+    });
+
+    proMoveEnEl.textContent =
+        node.proMove.en;
+
+    proMoveEsEl.textContent =
+        node.proMove.es;
+
+    whyWorksEnEl.textContent =
+        node.why.en;
+
+    whyWorksEsEl.textContent =
+        node.why.es;
+
+    setTimeout(() => {
+
+        outcomeEl.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    }, 150);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+restartBtn.addEventListener(
+    "click",
+    () => {
+
+        loadTrigger(
+            currentTrigger
+        );
+
+    }
+);
+
+
+previousBtn.addEventListener(
+    "click",
+    () => {
+
+        if (currentTrigger > 0) {
+
+            loadTrigger(
+                currentTrigger - 1
+            );
+
+        }
+
+    }
+);
+
+
+nextBtn.addEventListener(
+    "click",
+    () => {
+
+        if (
+            currentTrigger <
+            triggers.length - 1
+        ) {
+
+            loadTrigger(
+                currentTrigger + 1
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LEVEL SELECTOR
+========================================================= */
+
+function getDefeatedCount() {
+    return defeatedTriggers.size;
+}
+
+
+function updateLevelButtons() {
+
+    const defeatedCount =
+        getDefeatedCount();
+
+    document
+        .querySelectorAll(".level-btn")
+        .forEach(button => {
+
+            const required =
+                Number(button.dataset.required);
+
+            const label =
+                button.dataset.label;
+
+            const isLocked =
+                defeatedCount < required;
+
+            button.textContent =
+                isLocked
+                    ? `🔒 ${label}`
+                    : label;
+
+            button.setAttribute(
+                "aria-disabled",
+                isLocked ? "true" : "false"
+            );
+
+        });
+}
+
+document
+    .querySelectorAll(".level-btn")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const required =
+                    Number(button.dataset.required);
+
+                const defeatedCount =
+                    getDefeatedCount();
+
+                if (defeatedCount < required) {
+
+                    const remaining =
+                        required - defeatedCount;
+
+                    alert(
+                        `This level is locked. Defeat ${remaining} more trigger${remaining === 1 ? "" : "s"} to unlock it.\nEste nivel está bloqueado. Supera ${remaining} trigger${remaining === 1 ? "" : "s"} más para desbloquearlo.`
+                    );
+
+                    return;
+                }
+
+                document
+                    .querySelectorAll(".level-btn")
+                    .forEach(btn =>
+                        btn.classList.remove(
+                            "active"
+                        )
+                    );
+
+                button.classList.add(
+                    "active"
+                );
+
+                currentLevel =
+                    button.dataset.level;
+
+                loadTrigger(
+                    Number(button.dataset.start)
+                );
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   START
+========================================================= */
+
+init();
+
+</script>
+
+</body>
+</html>
