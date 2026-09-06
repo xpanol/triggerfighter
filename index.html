@@ -52,7 +52,7 @@ body {
     height: 200px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     padding: 0 34px;
 
@@ -64,12 +64,6 @@ body {
     width: 165px;
     height: auto;
     display: block;
-}
-
-.module-name {
-    color: var(--gold);
-    font-size: 18px;
-    letter-spacing: 2px;
 }
 
 /* =========================
@@ -152,48 +146,77 @@ body {
 }
 
 /* =========================
-   LEVELS
+   INTRO SCREEN
 ========================= */
 
-.level-selector {
-    display: flex;
-    justify-content: center;
-    gap: 9px;
-
-    margin-bottom: 30px;
-
-    flex-wrap: wrap;
-}
-
-.level-btn {
-    font-family: "Special Elite", monospace;
+.intro-screen {
+    background: var(--dark);
 
     border: 1px solid var(--border);
-    background: var(--dark);
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    margin-bottom: 30px;
+}
+
+.intro-en {
+    font-size: 17px;
+
+    line-height: 1.55;
+
+    color: #eee;
+
+    margin-bottom: 12px;
+}
+
+.intro-es {
+    font-size: 15px;
+
+    line-height: 1.5;
 
     color: var(--muted);
 
-    padding: 10px 16px;
+    margin-bottom: 22px;
+}
+
+.intro-controls {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.intro-controls label {
+    font-size: 13px;
+
+    color: var(--muted);
+
+    width: 100%;
+}
+
+.trigger-select {
+    font-family: "Special Elite", monospace;
+
+    background: var(--dark2);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
 
     border-radius: 6px;
 
-    cursor: pointer;
+    padding: 12px 14px;
 
-    font-size: 12px;
-    letter-spacing: .8px;
+    font-size: 14px;
 
-    transition: .2s;
-}
+    flex: 1;
 
-.level-btn:hover {
-    border-color: var(--gold);
-    color: var(--text);
-}
-
-.level-btn.active {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #111;
+    min-width: 220px;
 }
 
 /* =========================
@@ -220,21 +243,48 @@ body {
 }
 
 .trigger-title {
-    font-size: clamp(25px, 5vw, 36px);
+    font-size: clamp(28px, 6vw, 42px);
+
+    font-weight: 700;
 
     line-height: 1.2;
 
-    margin-bottom: 18px;
+    margin-bottom: 10px;
 }
 
 .trigger-title-es {
-    color: var(--muted);
+    color: var(--text);
 
-    font-size: 17px;
+    font-size: clamp(28px, 6vw, 42px);
 
-    line-height: 1.4;
+    font-weight: 700;
+
+    line-height: 1.2;
 
     margin-bottom: 20px;
+}
+
+@keyframes triggerReveal {
+
+    0% {
+        opacity: 0;
+        transform: translateY(-6px) scale(.97);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(0) scale(1.015);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.trigger-header.reveal .trigger-title,
+.trigger-header.reveal .trigger-title-es {
+    animation: triggerReveal .5s ease;
 }
 
 .trigger-meta {
@@ -272,7 +322,7 @@ body {
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
 
-    padding: 30px 25px 18px;
+    padding: 20px 14px 8px;
 
     min-height: 390px;
 }
@@ -281,9 +331,9 @@ body {
     display: flex;
     flex-direction: column;
 
-    max-width: 82%;
+    max-width: 75%;
 
-    margin-bottom: 25px;
+    margin-bottom: 6px;
 
     animation: messageIn .3s ease;
 }
@@ -299,11 +349,13 @@ body {
 }
 
 .message-label {
-    font-size: 12px;
+    font-size: 10px;
 
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
 
-    margin-bottom: 7px;
+    margin-bottom: 3px;
+
+    opacity: .55;
 
     color: #888;
 }
@@ -313,11 +365,15 @@ body {
 }
 
 .bubble {
-    padding: 17px 20px;
+    position: relative;
 
-    border-radius: 15px;
+    padding: 7px 9px;
 
-    line-height: 1.55;
+    border-radius: 7.5px;
+
+    line-height: 1.3;
+
+    box-shadow: 0 1px 1px rgba(0,0,0,.25);
 }
 
 .client .bubble {
@@ -325,7 +381,25 @@ body {
 
     border: 1px solid rgba(255,255,255,.08);
 
-    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.client .bubble::after {
+    content: "";
+
+    position: absolute;
+
+    left: -8px;
+    bottom: 0;
+
+    width: 15px;
+    height: 15px;
+
+    background: var(--dark2);
+
+    clip-path: polygon(100% 0, 100% 100%, 0% 100%);
+
+    filter: drop-shadow(-1px 1px 1px rgba(0,0,0,.35));
 }
 
 .you .bubble {
@@ -333,29 +407,47 @@ body {
 
     color: white;
 
-    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
-/* bilingual content */
+.you .bubble::before {
+    content: "";
+
+    position: absolute;
+
+    right: -8px;
+    bottom: 0;
+
+    width: 15px;
+    height: 15px;
+
+    background: var(--purple);
+
+    clip-path: polygon(0 0, 0 100%, 100% 100%);
+
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,.2));
+}
+
+/* bilingual content — EN and ES always render at the same font size */
 
 .en {
     display: block;
 
-    font-size: 18px;
+    font-size: 17px;
 
-    line-height: 1.5;
+    line-height: 1.35;
 }
 
 .es {
     display: block;
 
-    margin-top: 9px;
+    margin-top: 3px;
 
-    color: rgba(255,255,255,.66);
+    color: rgba(255,255,255,.62);
 
-    font-size: 18px;
+    font-size: 17px;
 
-    line-height: 1.45;
+    line-height: 1.35;
 }
 
 .you .es {
@@ -380,21 +472,23 @@ body {
 .response-title {
     color: var(--gold);
 
-    font-size: 20px;
+    font-size: clamp(24px, 5vw, 30px);
 
-    letter-spacing: 1px;
+    font-weight: 700;
 
-    margin-bottom: 6px;
+    letter-spacing: 1.5px;
 
-    display: inline-block;
+    margin-bottom: 10px;
 
-    transform-origin: left center;
+    display: block;
 
-    border-radius: 6px;
+    text-align: center;
 
-    padding: 4px 7px 2px;
+    transform-origin: center center;
 
-    margin-left: -7px;
+    border-radius: 8px;
+
+    padding: 8px 14px;
 }
 
 .response-area.awaiting-response .response-title {
@@ -413,7 +507,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    gap: 13px;
+    gap: 10px;
 }
 
 .choice {
@@ -429,9 +523,9 @@ body {
 
     color: var(--text);
 
-    border-radius: 11px;
+    border-radius: 7.5px;
 
-    padding: 17px 19px;
+    padding: 9px 11px;
 
     cursor: pointer;
 
@@ -454,36 +548,24 @@ body {
     transform: none;
 }
 
-.choice-strategy {
-    display: block;
-
-    color: var(--gold);
-
-    font-size: 12px;
-
-    letter-spacing: 1.2px;
-
-    margin-bottom: 9px;
-}
-
 .choice-en {
     display: block;
 
-    font-size: 18px;
+    font-size: 15px;
 
-    line-height: 1.5;
+    line-height: 1.3;
 }
 
 .choice-es {
     display: block;
 
-    margin-top: 8px;
+    margin-top: 3px;
 
     color: var(--muted);
 
-    font-size: 18px;
+    font-size: 15px;
 
-    line-height: 1.45;
+    line-height: 1.3;
 }
 
 .thinking {
@@ -561,25 +643,71 @@ body {
 .path {
     display: flex;
 
-    flex-wrap: wrap;
+    flex-direction: column;
 
-    gap: 8px;
+    gap: 14px;
 
     margin-bottom: 25px;
 }
 
-.path-item {
+.path-step {
     background: var(--dark2);
 
     border: 1px solid var(--border);
 
+    border-radius: 10px;
+
+    padding: 14px 16px;
+}
+
+.path-step-tag {
+    display: inline-block;
+
+    background: var(--gold);
+
+    color: #111;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    padding: 4px 9px;
+
     border-radius: 5px;
 
-    padding: 7px 10px;
+    margin-bottom: 10px;
+}
 
+.path-step-block {
+    margin-top: 10px;
+}
+
+.path-step-block-label {
     color: var(--gold);
 
     font-size: 11px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 4px;
+}
+
+.path-step-en {
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    color: #eee;
+}
+
+.path-step-es {
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    color: var(--muted);
+
+    margin-top: 3px;
 }
 
 .pro-move {
@@ -689,48 +817,33 @@ body {
 @keyframes yourMoveSignal {
 
     0% {
-        opacity: .25;
+        opacity: .3;
         color: var(--gold);
         background: transparent;
-        transform: translateY(14px) scale(.9);
+        transform: scale(.92);
         text-shadow: none;
     }
 
-    18% {
+    30% {
         opacity: 1;
         color: #111;
         background: var(--gold);
-        transform: translateY(-10px) scale(1.28);
+        transform: scale(1.1);
         text-shadow: none;
     }
 
-    34% {
-        opacity: 1;
-        color: #111;
-        background: var(--gold);
-        transform: translateX(14px) translateY(-2px) scale(1.18);
-        text-shadow: none;
-    }
-
-    52% {
+    60% {
         color: var(--gold);
         background: rgba(248,172,16,.16);
-        transform: translateX(0) translateY(0) scale(1.08);
+        transform: scale(1.03);
         text-shadow: 0 0 18px rgba(248,172,16,.75);
-    }
-
-    72% {
-        color: var(--gold);
-        background: rgba(248,172,16,.08);
-        transform: translateX(8px) scale(1.03);
-        text-shadow: 0 0 12px rgba(248,172,16,.45);
     }
 
     100% {
         opacity: 1;
         color: var(--gold);
         background: transparent;
-        transform: translateX(0) translateY(0) scale(1);
+        transform: scale(1);
         text-shadow: none;
     }
 }
@@ -751,10 +864,6 @@ body {
         width: 135px;
     }
 
-    .module-name {
-        font-size: 13px;
-    }
-
     .container {
         width: calc(100% - 18px);
 
@@ -766,7 +875,12 @@ body {
     }
 
     .header p {
-        font-size: 13px;
+        font-size: 14px;
+    }
+
+    .intro-en,
+    .intro-es {
+        font-size: 15px;
     }
 
     .trigger-header {
@@ -774,51 +888,77 @@ body {
     }
 
     .trigger-title {
-        font-size: 27px;
+        font-size: 22px;
     }
 
     .trigger-title-es {
-        font-size: 15px;
+        font-size: 22px;
+    }
+
+    .mission,
+    .pressure,
+    .category,
+    .progress-info,
+    .response-subtitle {
+        font-size: 13px;
     }
 
     .chat-container {
-        padding: 23px 14px 12px;
+        padding: 12px 10px 4px;
     }
 
     .message {
-        max-width: 94%;
+        max-width: 80%;
+
+        margin-bottom: 8px;
     }
 
     .bubble {
-        padding: 15px 16px;
+        padding: 9px 12px;
     }
 
     .en {
-        font-size: 18px;
+        font-size: 19px;
+
+        line-height: 1.4;
     }
 
     .es {
-        font-size: 18px;
+        font-size: 19px;
+
+        line-height: 1.4;
     }
 
     .response-area {
-        padding: 20px 14px;
+        padding: 18px 12px;
     }
 
     .choice {
-        padding: 16px;
+        padding: 12px 14px;
     }
 
     .choice-en {
-        font-size: 18px;
+        font-size: 19px;
+
+        line-height: 1.4;
     }
 
     .choice-es {
-        font-size: 18px;
+        font-size: 19px;
+
+        line-height: 1.4;
     }
 
     .outcome {
         padding: 22px 18px;
+    }
+
+    .path-step-en {
+        font-size: 16px;
+    }
+
+    .path-step-es {
+        font-size: 16px;
     }
 
     .navigation {
@@ -842,10 +982,6 @@ body {
         <img src="logo.png" alt="XPAÑOL">
     </div>
 
-    <div class="module-name">
-        TRIGGER FIGHTER
-    </div>
-
 </header>
 
 
@@ -866,157 +1002,181 @@ body {
     </section>
 
 
-    <div class="progress-area">
+    <section class="intro-screen" id="introScreen">
 
-        <div class="progress-info">
+        <p class="intro-en">
+            Trigger Fighter puts you face to face with real workplace pressure. Read the situation, pick how you respond and see the consequence of your choice.
+        </p>
 
-            <span id="progressLabel">
-                TRIGGER 1 OF 30
-            </span>
+        <p class="intro-es">
+            Trigger Fighter te enfrenta a situaciones reales de presión laboral. Lee la situación, elige cómo respondes y descubre la consecuencia de tu elección.
+        </p>
 
-            <span class="progress-number" id="progressPercent">
-                3%
-            </span>
+        <div class="intro-controls">
 
-        </div>
+            <label for="triggerSelect">
+                CHOOSE YOUR TRIGGER / ELIGE TU TRIGGER
+            </label>
 
-        <div class="progress-track">
+            <select class="trigger-select" id="triggerSelect"></select>
 
-            <div
-                class="progress-bar"
-                id="progressBar">
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="level-selector">
-
-        <button class="level-btn active" data-level="react" data-required="0" data-start="0" data-label="LEVEL 1 · REACT">
-            LEVEL 1 · REACT
-        </button>
-
-        <button class="level-btn" data-level="pressure" data-required="10" data-start="10" data-label="LEVEL 2 · UNDER PRESSURE">
-            🔒 LEVEL 2 · UNDER PRESSURE
-        </button>
-
-        <button class="level-btn" data-level="fighter" data-required="20" data-start="20" data-label="LEVEL 3 · FIGHTER MODE">
-            🔒 LEVEL 3 · FIGHTER MODE
-        </button>
-
-    </div>
-
-
-    <section class="trigger-header">
-
-        <div class="category" id="category"></div>
-
-        <div class="trigger-title" id="triggerTitle"></div>
-
-        <div class="trigger-title-es" id="triggerTitleEs"></div>
-
-        <div class="trigger-meta">
-
-            <div class="mission">
-
-                <strong>MISSION:</strong>
-
-                <span id="mission"></span>
-
-            </div>
-
-            <div class="pressure" id="pressure"></div>
+            <button class="nav-btn primary" id="startBtn">
+                LET'S GO / VAMOS
+            </button>
 
         </div>
 
     </section>
 
 
-    <section class="chat-container" id="chat"></section>
+    <div id="gameArea" style="display:none;">
 
+        <div class="progress-area">
 
-    <section class="response-area" id="responseArea">
+            <div class="progress-info">
 
-        <div class="response-title">
-            YOUR MOVE
-        </div>
+                <span id="progressLabel">
+                    TRIGGER 1 OF 30
+                </span>
 
-        <div class="response-subtitle">
-            Choose how you respond.
-            / Elige cómo respondes.
-        </div>
+                <span class="progress-number" id="progressPercent">
+                    3%
+                </span>
 
-        <div class="choices" id="choices"></div>
-
-        <div class="thinking" id="thinking">
-            The client is responding...
-            / El cliente está respondiendo...
-        </div>
-
-    </section>
-
-
-    <section class="outcome" id="outcome">
-
-        <div class="outcome-status" id="outcomeStatus">
-            TRIGGER DEFEATED
-        </div>
-
-        <div class="outcome-status-es" id="outcomeStatusEs">
-            TRIGGER SUPERADO
-        </div>
-
-
-        <div class="path-label">
-            YOUR PATH / TU CAMINO
-        </div>
-
-        <div class="path" id="path"></div>
-
-
-        <div class="pro-move">
-
-            <div class="pro-label">
-                PRO MOVE / MOVIMIENTO PRO
             </div>
 
-            <div class="pro-en" id="proMoveEn"></div>
+            <div class="progress-track">
 
-            <div class="pro-es" id="proMoveEs"></div>
+                <div
+                    class="progress-bar"
+                    id="progressBar">
+                </div>
 
-        </div>
-
-
-        <div class="why-box">
-
-            <div class="why-label">
-                WHY IT WORKS / POR QUÉ FUNCIONA
             </div>
 
-            <div class="why-en" id="whyWorksEn"></div>
+        </div>
 
-            <div class="why-es" id="whyWorksEs"></div>
+
+        <section class="trigger-header" id="triggerHeader">
+
+            <div class="category" id="category"></div>
+
+            <div class="trigger-title" id="triggerTitle"></div>
+
+            <div class="trigger-title-es" id="triggerTitleEs"></div>
+
+            <div class="trigger-meta">
+
+                <div class="mission">
+
+                    <strong>MISSION / MISIÓN:</strong>
+
+                    <span id="mission"></span>
+
+                    <span id="missionEs"></span>
+
+                </div>
+
+                <div class="pressure" id="pressure"></div>
+
+            </div>
+
+        </section>
+
+
+        <section class="chat-container" id="chat"></section>
+
+
+        <section class="response-area" id="responseArea">
+
+            <div class="response-title">
+                YOUR MOVE / TU TURNO
+            </div>
+
+            <div class="response-subtitle">
+                Choose how you respond.
+                / Elige cómo respondes.
+            </div>
+
+            <div class="choices" id="choices"></div>
+
+            <div class="thinking" id="thinking">
+                The client is responding...
+                / El cliente está respondiendo...
+            </div>
+
+        </section>
+
+
+        <section class="outcome" id="outcome">
+
+            <div class="outcome-status" id="outcomeStatus">
+                TRIGGER DEFEATED
+            </div>
+
+            <div class="outcome-status-es" id="outcomeStatusEs">
+                TRIGGER SUPERADO
+            </div>
+
+
+            <div class="path-label">
+                YOUR PATH / TU CAMINO
+            </div>
+
+            <div class="path" id="path"></div>
+
+
+            <div class="pro-move">
+
+                <div class="pro-label">
+                    PRO MOVE / MOVIMIENTO PRO
+                </div>
+
+                <div class="pro-en" id="proMoveEn"></div>
+
+                <div class="pro-es" id="proMoveEs"></div>
+
+            </div>
+
+
+            <div class="why-box">
+
+                <div class="why-label">
+                    WHY IT WORKS / POR QUÉ FUNCIONA
+                </div>
+
+                <div class="why-en" id="whyWorksEn"></div>
+
+                <div class="why-es" id="whyWorksEs"></div>
+
+            </div>
+
+        </section>
+
+
+        <div class="navigation">
+
+            <button class="nav-btn" id="previousBtn">
+                ← PREVIOUS / ANTERIOR
+            </button>
+
+            <button class="nav-btn" id="restartBtn">
+                ↻ TRY AGAIN / REINTENTAR
+            </button>
+
+            <button class="nav-btn primary" id="nextBtn">
+                NEXT / SIGUIENTE →
+            </button>
 
         </div>
 
-    </section>
+        <div class="navigation">
 
+            <button class="nav-btn" id="chooseTriggerBtn" style="width:100%;">
+                ☰ CHOOSE TRIGGER / ELEGIR TRIGGER
+            </button>
 
-    <div class="navigation">
-
-        <button class="nav-btn" id="previousBtn">
-            ← PREVIOUS
-        </button>
-
-        <button class="nav-btn" id="restartBtn">
-            ↻ TRY AGAIN
-        </button>
-
-        <button class="nav-btn primary" id="nextBtn">
-            NEXT →
-        </button>
+        </div>
 
     </div>
 
@@ -1041,6 +1201,7 @@ const triggers = [
     titleEs: "LA CAMPAÑA NO ESTÁ FUNCIONANDO",
 
     mission: "Stay calm and move toward evidence.",
+    missionEs:"Mantén la calma y busca la evidencia.",
     pressure: "🔥 HIGH",
 
     opening: {
@@ -1319,6 +1480,7 @@ const triggers = [
     titleEs: "¿DÓNDE ESTÁ EL INFORME?",
 
     mission: "Respond without overpromising.",
+    missionEs:"Responde sin prometer de más.",
     pressure: "🔥 HIGH",
 
     opening: {
@@ -1504,6 +1666,7 @@ const triggers = [
     titleEs: "¿PUEDES AÑADIR ESTO?",
 
     mission: "Protect scope without sounding difficult.",
+    missionEs:"Protege el alcance sin sonar conflictivo.",
     pressure: "⚡ MEDIUM",
 
     opening: {
@@ -1689,6 +1852,7 @@ const triggers = [
     title:"THIS ISN'T GOOD ENOUGH",
     titleEs:"ESTO NO ES SUFICIENTEMENTE BUENO",
     mission:"Receive criticism without becoming defensive.",
+    missionEs:"Recibe la crítica sin ponerte a la defensiva.",
     pressure:"🔥 HIGH",
     opening:{
         en:"Honestly, this isn't good enough. I expected something much stronger.",
@@ -1729,6 +1893,7 @@ const triggers = [
     title:"EVERYTHING IS URGENT",
     titleEs:"TODO ES URGENTE",
     mission:"Create priorities instead of absorbing pressure.",
+    missionEs:"Crea prioridades en lugar de absorber la presión.",
     pressure:"🔥 HIGH",
     opening:{en:"I need all of this today. Everything is urgent.",es:"Necesito todo esto hoy. Todo es urgente."},
     nodes:{
@@ -1766,6 +1931,7 @@ const triggers = [
     title:"WHO IS RESPONSIBLE?",
     titleEs:"¿QUIÉN ES RESPONSABLE?",
     mission:"Establish ownership clearly.",
+    missionEs:"Establece la responsabilidad con claridad.",
     pressure:"⚡ MEDIUM",
     opening:{en:"Who is actually responsible for this? I keep hearing different answers.",es:"¿Quién es realmente responsable de esto? No paro de recibir respuestas diferentes."},
     nodes:{
@@ -1795,6 +1961,7 @@ const triggers = [
     title:"WHY ISN'T THIS READY?",
     titleEs:"¿POR QUÉ NO ESTÁ LISTO?",
     mission:"Surface dependencies early.",
+    missionEs:"Identifica las dependencias a tiempo.",
     pressure:"🔥 HIGH",
     opening:{en:"Why isn't this ready? We agreed on the deadline.",es:"¿Por qué no está listo? Acordamos la fecha límite."},
     nodes:{
@@ -1832,6 +1999,7 @@ const triggers = [
     title:"CAN WE HAVE A QUICK CALL?",
     titleEs:"¿PODEMOS HACER UNA LLAMADA RÁPIDA?",
     mission:"Protect focus while staying collaborative.",
+    missionEs:"Protege tu enfoque sin dejar de ser colaborativo.",
     pressure:"⚡ MEDIUM",
     opening:{en:"Can we jump on a quick call now? It's really important.",es:"¿Podemos hacer una llamada rápida ahora? Es realmente importante."},
     nodes:{
@@ -1869,6 +2037,7 @@ const triggers = [
     title:"I THOUGHT THIS WAS INCLUDED",
     titleEs:"PENSABA QUE ESTO ESTABA INCLUIDO",
     mission:"Handle an expectation mismatch professionally.",
+    missionEs:"Gestiona un desajuste de expectativas con profesionalidad.",
     pressure:"🔥 HIGH",
     opening:{en:"I thought this was included in the original agreement.",es:"Pensaba que esto estaba incluido en el acuerdo original."},
     nodes:{
@@ -1898,6 +2067,7 @@ const triggers = [
     title:"WE NEED TO CHANGE DIRECTION",
     titleEs:"TENEMOS QUE CAMBIAR DE DIRECCIÓN",
     mission:"Adapt without losing control.",
+    missionEs:"Adáptate sin perder el control.",
     pressure:"🔥 HIGH",
     opening:{en:"We've changed our mind. We need to take this in a different direction.",es:"Hemos cambiado de opinión. Tenemos que llevar esto en otra dirección."},
     nodes:{
@@ -1927,6 +2097,7 @@ const triggers = [
     title:"THE NUMBERS DON'T MATCH",
     titleEs:"LOS NÚMEROS NO COINCIDEN",
     mission:"Investigate before explaining.",
+    missionEs:"Investiga antes de explicar.",
     pressure:"🔥 HIGH",
     opening:{en:"These numbers don't match what we saw last week.",es:"Estos números no coinciden con lo que vimos la semana pasada."},
     nodes:{
@@ -1956,6 +2127,7 @@ const triggers = [
     title:"DID YOU SEE MY EMAIL?",
     titleEs:"¿VISTE MI EMAIL?",
     mission:"Respond without sounding defensive.",
+    missionEs:"Responde sin sonar defensivo.",
     pressure:"⚡ MEDIUM",
     opening:{en:"Did you see my email? I sent it yesterday.",es:"¿Viste mi email? Lo envié ayer."},
     nodes:{
@@ -1977,6 +2149,7 @@ const triggers = [
     title:"CAN YOU LOWER THE PRICE?",
     titleEs:"¿PUEDES BAJAR EL PRECIO?",
     mission:"Protect value before discussing price.",
+    missionEs:"Protege el valor antes de hablar de precio.",
     pressure:"🔥 HIGH",
     opening:{en:"Can you lower the price? Your competitor is cheaper.",es:"¿Puedes bajar el precio? Tu competidor es más barato."},
     nodes:{
@@ -2006,6 +2179,7 @@ const triggers = [
     title:"IT'S NOT WORKING",
     titleEs:"NO FUNCIONA",
     mission:"Move from frustration to diagnosis.",
+    missionEs:"Pasa de la frustración al diagnóstico.",
     pressure:"🔥 HIGH",
     opening:{en:"The platform isn't working again. This is becoming ridiculous.",es:"La plataforma no funciona otra vez. Esto se está volviendo ridículo."},
     nodes:{
@@ -2026,7 +2200,7 @@ const triggers = [
         },
         win:{end:true,success:true,proMove:{en:"Diagnose the scope of the problem before proposing a cause.",es:"Diagnostica el alcance del problema antes de proponer una causa."},why:{en:"A precise problem definition accelerates troubleshooting.",es:"Una definición precisa del problema acelera la resolución."}},
         lose:{end:true,success:false,proMove:{en:"Don't dismiss the problem or guess the cause.",es:"No minimices el problema ni adivines la causa."},why:{en:"Premature explanations create more frustration when they are wrong.",es:"Las explicaciones prematuras generan más frustración cuando son incorrectas."}},
-        weak:{end:true,success:false,proMove:{en:"Take ownership of the next step even when another team will execute it.",es:"Asume el siguiente paso aunque otro equipo vaya a ejecutarlo."},why:{en:"Escalation is stronger when the handoff is clear and owned.",es:"La escalación es más eficaz cuando el traspaso está claro y tiene un responsable."}}
+        weak:{end:true,success:false,proMove:{en:"Take ownership of the next step even when another team will execute it.",es:"Asume el siguiente paso aunque otro equipo vaya a ejecutarlo.",},why:{en:"Escalation is stronger when the handoff is clear and owned.",es:"La escalación es más eficaz cuando el traspaso está claro y tiene un responsable."}}
     }
 },
 
@@ -2035,6 +2209,7 @@ const triggers = [
     title:"I DON'T AGREE",
     titleEs:"NO ESTOY DE ACUERDO",
     mission:"Disagree without escalating.",
+    missionEs:"Discrepa sin escalar el conflicto.",
     pressure:"🔥 HIGH",
     opening:{en:"I don't agree with that conclusion.",es:"No estoy de acuerdo con esa conclusión."},
     nodes:{
@@ -2064,6 +2239,7 @@ const triggers = [
     title:"I NEED THIS NOW",
     titleEs:"NECESITO ESTO AHORA",
     mission:"Stay useful without accepting impossible timing.",
+    missionEs:"Sé útil sin aceptar plazos imposibles.",
     pressure:"🔥 HIGH",
     opening:{en:"I need this in the next hour. Can you do it?",es:"Necesito esto en la próxima hora. ¿Puedes hacerlo?"},
     nodes:{
@@ -2093,6 +2269,7 @@ const triggers = [
     title:"THE BOSS WANTS IT DIFFERENTLY",
     titleEs:"EL JEFE LO QUIERE DE OTRA MANERA",
     mission:"Handle conflicting expectations.",
+    missionEs:"Gestiona expectativas contradictorias.",
     pressure:"🔥 HIGH",
     opening:{en:"My manager wants this done completely differently.",es:"Mi responsable quiere que esto se haga de una manera completamente diferente."},
     nodes:{
@@ -2122,6 +2299,7 @@ const triggers = [
     title:"THE RESULTS ARE BELOW TARGET",
     titleEs:"LOS RESULTADOS ESTÁN POR DEBAJO DEL OBJETIVO",
     mission:"Respond with analysis and action.",
+    missionEs:"Responde con análisis y acción.",
     pressure:"🔥 HIGH",
     opening:{en:"We're below target again this month. What is going on?",es:"Estamos por debajo del objetivo otra vez este mes. ¿Qué está pasando?"},
     nodes:{
@@ -2151,6 +2329,7 @@ const triggers = [
     title:"YOU DIDN'T KEEP ME UPDATED",
     titleEs:"NO ME MANTUVISTE INFORMADO",
     mission:"Repair communication and restore visibility.",
+    missionEs:"Repara la comunicación y recupera la visibilidad.",
     pressure:"🔥 HIGH",
     opening:{en:"You didn't keep me updated. I shouldn't have to chase you for information.",es:"No me mantuviste informado. No debería tener que perseguirte para obtener información."},
     nodes:{
@@ -2180,6 +2359,7 @@ const triggers = [
     title:"WE MIGHT MISS THE DEADLINE",
     titleEs:"PODRÍAMOS NO LLEGAR A LA FECHA",
     mission:"Raise risk early and propose mitigation.",
+    missionEs:"Comunica el riesgo a tiempo y propone mitigación.",
     pressure:"🔥 HIGH",
     opening:{en:"Are we going to hit the deadline?",es:"¿Vamos a llegar a la fecha límite?"},
     nodes:{
@@ -2209,6 +2389,7 @@ const triggers = [
     title:"I WANT AN ANSWER NOW",
     titleEs:"QUIERO UNA RESPUESTA AHORA",
     mission:"Stay useful without inventing certainty.",
+    missionEs:"Sé útil sin inventar certeza.",
     pressure:"🔥 HIGH",
     opening:{en:"I want an answer now. Don't tell me you'll get back to me later.",es:"Quiero una respuesta ahora. No me digas que volverás a hablar conmigo más tarde."},
     nodes:{
@@ -2238,6 +2419,7 @@ const triggers = [
     title:"WE MADE A MISTAKE",
     titleEs:"HEMOS COMETIDO UN ERROR",
     mission:"Own the mistake and contain the impact.",
+    missionEs:"Asume el error y contén el impacto.",
     pressure:"🔥 HIGH",
     opening:{en:"There is a mistake in the campaign setup. What happened?",es:"Hay un error en la configuración de la campaña. ¿Qué ha pasado?"},
     nodes:{
@@ -2267,6 +2449,7 @@ const triggers = [
     title:"WE NEED MORE PEOPLE",
     titleEs:"NECESITAMOS MÁS PERSONAS",
     mission:"Justify resource needs with evidence.",
+    missionEs:"Justifica la necesidad de recursos con evidencia.",
     pressure:"⚡ MEDIUM",
     opening:{en:"Why do you need another person on the project?",es:"¿Por qué necesitas otra persona en el proyecto?"},
     nodes:{
@@ -2296,6 +2479,7 @@ const triggers = [
     title:"YOUR COMPETITOR DID IT FASTER",
     titleEs:"TU COMPETIDOR LO HIZO MÁS RÁPIDO",
     mission:"Respond without attacking the competitor.",
+    missionEs:"Responde sin atacar al competidor.",
     pressure:"🔥 HIGH",
     opening:{en:"Your competitor delivered this much faster than you.",es:"Tu competidor entregó esto mucho más rápido que vosotros."},
     nodes:{
@@ -2325,6 +2509,7 @@ const triggers = [
     title:"I NEED THIS APPROVED TODAY",
     titleEs:"NECESITO QUE ESTO SE APRUEBE HOY",
     mission:"Create a decision path.",
+    missionEs:"Crea un camino hacia la decisión.",
     pressure:"🔥 HIGH",
     opening:{en:"I need this approved today. Can you make sure it happens?",es:"Necesito que esto se apruebe hoy. ¿Puedes asegurarte de que ocurra?"},
     nodes:{
@@ -2354,6 +2539,7 @@ const triggers = [
     title:"WE'RE MISSING SOMETHING",
     titleEs:"NOS FALTA ALGO",
     mission:"Ask for what is needed without blaming.",
+    missionEs:"Pide lo que falta sin culpar a nadie.",
     pressure:"⚡ MEDIUM",
     opening:{en:"We can't move forward. Something is missing.",es:"No podemos avanzar. Falta algo."},
     nodes:{
@@ -2383,6 +2569,7 @@ const triggers = [
     title:"WHICH ONE COMES FIRST?",
     titleEs:"¿CUÁL VA PRIMERO?",
     mission:"Resolve competing priorities.",
+    missionEs:"Resuelve prioridades que compiten entre sí.",
     pressure:"⚡ MEDIUM",
     opening:{en:"Both teams say their request is the priority. Which one do we do first?",es:"Los dos equipos dicen que su petición es prioritaria. ¿Cuál hacemos primero?"},
     nodes:{
@@ -2412,6 +2599,7 @@ const triggers = [
     title:"THIS SHOULD HAVE BEEN DONE ALREADY",
     titleEs:"ESTO YA DEBERÍA ESTAR HECHO",
     mission:"Respond to frustration with facts and action.",
+    missionEs:"Responde a la frustración con hechos y acción.",
     pressure:"🔥 HIGH",
     opening:{en:"This should have been done already. Why is it still pending?",es:"Esto ya debería estar hecho. ¿Por qué sigue pendiente?"},
     nodes:{
@@ -2441,6 +2629,7 @@ const triggers = [
     title:"THE CLIENT HATED IT",
     titleEs:"AL CLIENTE NO LE GUSTÓ NADA",
     mission:"Extract useful feedback from an emotional reaction.",
+    missionEs:"Extrae feedback útil de una reacción emocional.",
     pressure:"🔥 HIGH",
     opening:{en:"The client hated the proposal. They said it completely missed the mark.",es:"Al cliente no le gustó nada la propuesta. Dijo que no daba en el clavo."},
     nodes:{
@@ -2470,6 +2659,7 @@ const triggers = [
     title:"THEY KEEP BLOCKING US",
     titleEs:"SIGUEN BLOQUEÁNDONOS",
     mission:"Move team conflict toward resolution.",
+    missionEs:"Encamina el conflicto entre equipos hacia una solución.",
     pressure:"🔥 HIGH",
     opening:{en:"That team keeps blocking us. We can't work like this.",es:"Ese equipo sigue bloqueándonos. No podemos trabajar así."},
     nodes:{
@@ -2499,6 +2689,7 @@ const triggers = [
     title:"CAN WE SKIP THE CHECK?",
     titleEs:"¿PODEMOS SALTARNOS LA COMPROBACIÓN?",
     mission:"Protect quality without blocking progress.",
+    missionEs:"Protege la calidad sin bloquear el avance.",
     pressure:"⚡ MEDIUM",
     opening:{en:"We're running late. Can we skip the final quality check?",es:"Vamos tarde. ¿Podemos saltarnos la comprobación final de calidad?"},
     nodes:{
@@ -2528,6 +2719,7 @@ const triggers = [
     title:"THE ULTIMATE PRESSURE TEST",
     titleEs:"LA PRUEBA DEFINITIVA DE PRESIÓN",
     mission:"Stay calm, clear and useful under pressure.",
+    missionEs:"Mantén la calma, la claridad y la utilidad bajo presión.",
     pressure:"🔥🔥 EXTREME",
     opening:{en:"We're late, the client is unhappy, the numbers are weak and management wants an answer now. What are you going to do?",es:"Vamos tarde, el cliente está descontento, los números son malos y la dirección quiere una respuesta ahora. ¿Qué vas a hacer?"},
     nodes:{
@@ -2570,11 +2762,10 @@ const triggers = [
 let currentTrigger = 0;
 let currentNode = "start";
 let conversationPath = [];
-let currentLevel = "react";
-const defeatedTriggers = new Set();
 let renderToken = 0;
 
-const typewriterSpeed = 22;
+const typewriterSpeedOpponent = 28;
+const typewriterSpeedUser = 10;
 
 
 /* =========================================================
@@ -2592,6 +2783,9 @@ const titleEsEl =
 
 const missionEl =
     document.getElementById("mission");
+
+const missionEsEl =
+    document.getElementById("missionEs");
 
 const pressureEl =
     document.getElementById("pressure");
@@ -2650,15 +2844,82 @@ const nextBtn =
 const restartBtn =
     document.getElementById("restartBtn");
 
+const introScreen =
+    document.getElementById("introScreen");
+
+const gameArea =
+    document.getElementById("gameArea");
+
+const triggerSelect =
+    document.getElementById("triggerSelect");
+
+const startBtn =
+    document.getElementById("startBtn");
+
+const chooseTriggerBtn =
+    document.getElementById("chooseTriggerBtn");
+
+const triggerHeaderEl =
+    document.getElementById("triggerHeader");
+
 
 /* =========================================================
    INITIALISE
 ========================================================= */
 
 function init() {
-    updateLevelButtons();
 
-    loadTrigger(currentTrigger);
+    triggers.forEach((trigger, index) => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            index;
+
+        option.textContent =
+            `${trigger.title} / ${trigger.titleEs}`;
+
+        triggerSelect.appendChild(option);
+
+    });
+
+    triggerSelect.value = 0;
+
+    startBtn.addEventListener("click", () => {
+
+        const selectedIndex =
+            Number(triggerSelect.value);
+
+        introScreen.style.display =
+            "none";
+
+        gameArea.style.display =
+            "block";
+
+        loadTrigger(selectedIndex);
+
+    });
+
+    chooseTriggerBtn.addEventListener("click", () => {
+
+        renderToken += 1;
+
+        triggerSelect.value =
+            currentTrigger;
+
+        gameArea.style.display =
+            "none";
+
+        introScreen.style.display =
+            "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
 }
 
 
@@ -2694,8 +2955,17 @@ function loadTrigger(index) {
     missionEl.textContent =
         trigger.mission;
 
+    missionEsEl.textContent =
+        " / " + trigger.missionEs;
+
     pressureEl.textContent =
         trigger.pressure;
+
+    triggerHeaderEl.classList.remove("reveal");
+
+    void triggerHeaderEl.offsetWidth;
+
+    triggerHeaderEl.classList.add("reveal");
 
     chatEl.innerHTML = "";
 
@@ -2774,7 +3044,7 @@ function updateProgress() {
    ADD MESSAGE
 ========================================================= */
 
-function typeText(element, text, token) {
+function typeText(element, text, token, speed) {
 
     return new Promise(resolve => {
 
@@ -2804,7 +3074,7 @@ function typeText(element, text, token) {
 
             setTimeout(
                 writeNextCharacter,
-                typewriterSpeed
+                speed
             );
         }
 
@@ -2849,8 +3119,8 @@ async function addMessage(type, message, options = {}) {
 
     label.textContent =
         type === "client"
-            ? "CLIENT"
-            : "YOU";
+            ? "CLIENT / CLIENTE"
+            : "YOU / TÚ";
 
     const bubble =
         document.createElement("div");
@@ -2900,11 +3170,17 @@ async function addMessage(type, message, options = {}) {
         return true;
     }
 
+    const speed =
+        type === "client"
+            ? typewriterSpeedOpponent
+            : typewriterSpeedUser;
+
     const enDone =
         await typeText(
             en,
             message.en,
-            token
+            token,
+            speed
         );
 
     if (!enDone) {
@@ -2912,13 +3188,14 @@ async function addMessage(type, message, options = {}) {
         return false;
     }
 
-    await wait(140);
+    await wait(type === "client" ? 140 : 60);
 
     const esDone =
         await typeText(
             es,
             message.es,
-            token
+            token,
+            speed
         );
 
     return esDone;
@@ -2946,7 +3223,10 @@ function showChoices() {
         return;
     }
 
-    node.choices.forEach(choice => {
+    const shuffledChoices =
+        [...node.choices].sort(() => Math.random() - 0.5);
+
+    shuffledChoices.forEach(choice => {
 
         const button =
             document.createElement("button");
@@ -2955,10 +3235,6 @@ function showChoices() {
             "choice";
 
         button.innerHTML = `
-            <span class="choice-strategy">
-                ${choice.strategy}
-            </span>
-
             <span class="choice-en">
                 ${choice.en}
             </span>
@@ -2978,10 +3254,17 @@ function showChoices() {
 
     setTimeout(() => {
 
-        responseArea.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        const lastMessage =
+            chatEl.lastElementChild;
+
+        if (lastMessage) {
+
+            lastMessage.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
 
     }, 80);
 
@@ -3005,7 +3288,7 @@ function showChoices() {
    CHOOSE RESPONSE
 ========================================================= */
 
-function chooseResponse(choice) {
+async function chooseResponse(choice) {
 
     document
         .querySelectorAll(".choice")
@@ -3024,16 +3307,29 @@ function chooseResponse(choice) {
     conversationPath.push({
         strategy: choice.strategy,
         en: choice.en,
-        es: choice.es
+        es: choice.es,
+        nextKey: choice.next
     });
 
-    addMessage(
+    const token =
+        renderToken;
+
+    await addMessage(
         "you",
         {
             en: choice.en,
             es: choice.es
+        },
+        {
+            typewriter: true,
+            token
         }
     );
+
+    if (token !== renderToken) {
+
+        return;
+    }
 
     thinkingEl.classList.add("show");
 
@@ -3055,9 +3351,6 @@ function chooseResponse(choice) {
             finishScenario(nextNode);
 
         } else {
-
-            const token =
-                renderToken;
 
             addMessage(
                 "client",
@@ -3101,10 +3394,6 @@ function finishScenario(node) {
 
     if (node.success) {
 
-        defeatedTriggers.add(currentTrigger);
-
-        updateLevelButtons();
-
         outcomeEl.classList.remove(
             "failed"
         );
@@ -3125,23 +3414,68 @@ function finishScenario(node) {
             "TRIGGER GOT THE BETTER OF YOU";
 
         outcomeStatusEsEl.textContent =
-            "EL TRIGGER TE SUPERÓ";
+            "TRIGGER PUDO CONTIGO";
     }
 
     pathEl.innerHTML = "";
 
+    const trigger =
+        triggers[currentTrigger];
+
     conversationPath.forEach(step => {
 
-        const item =
+        const stepNode =
+            trigger.nodes[step.nextKey];
+
+        let consequenceEn;
+        let consequenceEs;
+
+        if (stepNode && stepNode.client) {
+
+            consequenceEn =
+                stepNode.client.en;
+
+            consequenceEs =
+                stepNode.client.es;
+
+        } else {
+
+            consequenceEn =
+                "This led directly to the final outcome below.";
+
+            consequenceEs =
+                "Esto llevó directamente al resultado final que aparece abajo.";
+        }
+
+        const card =
             document.createElement("div");
 
-        item.className =
-            "path-item";
+        card.className =
+            "path-step";
 
-        item.textContent =
-            step.strategy;
+        card.innerHTML = `
+            <span class="path-step-tag">
+                ${step.strategy}
+            </span>
 
-        pathEl.appendChild(item);
+            <div class="path-step-block">
+                <div class="path-step-block-label">
+                    YOUR RESPONSE / TU RESPUESTA
+                </div>
+                <div class="path-step-en">${step.en}</div>
+                <div class="path-step-es">${step.es}</div>
+            </div>
+
+            <div class="path-step-block">
+                <div class="path-step-block-label">
+                    CONSEQUENCE / CONSECUENCIA
+                </div>
+                <div class="path-step-en">${consequenceEn}</div>
+                <div class="path-step-es">${consequenceEs}</div>
+            </div>
+        `;
+
+        pathEl.appendChild(card);
     });
 
     proMoveEnEl.textContent =
@@ -3216,97 +3550,6 @@ nextBtn.addEventListener(
 
     }
 );
-
-
-/* =========================================================
-   LEVEL SELECTOR
-========================================================= */
-
-function getDefeatedCount() {
-    return defeatedTriggers.size;
-}
-
-
-function updateLevelButtons() {
-
-    const defeatedCount =
-        getDefeatedCount();
-
-    document
-        .querySelectorAll(".level-btn")
-        .forEach(button => {
-
-            const required =
-                Number(button.dataset.required);
-
-            const label =
-                button.dataset.label;
-
-            const isLocked =
-                defeatedCount < required;
-
-            button.textContent =
-                isLocked
-                    ? `🔒 ${label}`
-                    : label;
-
-            button.setAttribute(
-                "aria-disabled",
-                isLocked ? "true" : "false"
-            );
-
-        });
-}
-
-document
-    .querySelectorAll(".level-btn")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const required =
-                    Number(button.dataset.required);
-
-                const defeatedCount =
-                    getDefeatedCount();
-
-                if (defeatedCount < required) {
-
-                    const remaining =
-                        required - defeatedCount;
-
-                    alert(
-                        `This level is locked. Defeat ${remaining} more trigger${remaining === 1 ? "" : "s"} to unlock it.\nEste nivel está bloqueado. Supera ${remaining} trigger${remaining === 1 ? "" : "s"} más para desbloquearlo.`
-                    );
-
-                    return;
-                }
-
-                document
-                    .querySelectorAll(".level-btn")
-                    .forEach(btn =>
-                        btn.classList.remove(
-                            "active"
-                        )
-                    );
-
-                button.classList.add(
-                    "active"
-                );
-
-                currentLevel =
-                    button.dataset.level;
-
-                loadTrigger(
-                    Number(button.dataset.start)
-                );
-
-            }
-        );
-
-    });
 
 
 /* =========================================================
