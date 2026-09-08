@@ -2758,6 +2758,113 @@ const triggers = [
 
 
 /* =========================================================
+   TAG INSIGHTS
+   What each strategy tag actually signals — shown in the
+   summary so tags carry real communication insight, not
+   just a label.
+========================================================= */
+
+const tagInsights = {
+    "ACKNOWLEDGE": { en: "You validate the concern before acting — this lowers defensiveness on both sides.", es: "Validas la preocupación antes de actuar: esto reduce la actitud defensiva de ambas partes." },
+    "ACTION": { en: "You commit to a concrete next step instead of more discussion.", es: "Te comprometes con un paso concreto en lugar de seguir hablando." },
+    "AGREE": { en: "You accept the demand without checking if it's realistic.", es: "Aceptas la petición sin comprobar si es realista." },
+    "ALIGN": { en: "You seek to understand the real reason behind the request first.", es: "Buscas entender primero el motivo real de la petición." },
+    "ANALYSE": { en: "You look for the root cause before reacting.", es: "Buscas la causa raíz antes de reaccionar." },
+    "APOLOGISE": { en: "You take responsibility, but risk overcorrecting without a clear next step.", es: "Asumes responsabilidad, pero corres el riesgo de sobrerreaccionar sin un paso claro." },
+    "ARGUE": { en: "You try to win the point instead of solving the problem.", es: "Intentas ganar el argumento en lugar de resolver el problema." },
+    "ASK": { en: "You confirm the request before committing resources to it.", es: "Confirmas la petición antes de comprometer recursos." },
+    "ASSESS": { en: "You gather facts before making a judgment call.", es: "Reúnes datos antes de emitir un juicio." },
+    "ASSUME": { en: "You state something as fact without verifying it first.", es: "Afirmas algo como un hecho sin verificarlo antes." },
+    "ATTACK": { en: "You criticise a third party instead of addressing the actual issue.", es: "Criticas a un tercero en lugar de abordar el problema real." },
+    "AVOID": { en: "You sidestep the request instead of engaging with it.", es: "Evitas la petición en lugar de abordarla." },
+    "BLAME": { en: "You point to another person or team instead of taking ownership.", es: "Señalas a otra persona o equipo en lugar de asumir responsabilidad." },
+    "BOUNDARY": { en: "You protect your time while still offering a way forward.", es: "Proteges tu tiempo sin dejar de ofrecer un camino a seguir." },
+    "CHECK": { en: "You verify the facts before responding to the claim.", es: "Verificas los hechos antes de responder a la afirmación." },
+    "CLARIFY": { en: "You ask a precise question instead of guessing what's needed.", es: "Haces una pregunta precisa en lugar de adivinar lo que se necesita." },
+    "CLEAR": { en: "You separate what you know from what still needs confirming.", es: "Separas lo que sabes de lo que aún hay que confirmar." },
+    "COMMIT": { en: "You give a specific promise you can actually be held to.", es: "Das una promesa concreta de la que realmente puedes responder." },
+    "COMPLAIN": { en: "You express frustration instead of proposing a way forward.", es: "Expresas frustración en lugar de proponer una salida." },
+    "CONFIRM": { en: "You lock in the agreed priority so there's no ambiguity later.", es: "Confirmas la prioridad acordada para que no haya ambigüedad después." },
+    "CONTROL": { en: "You take ownership of what's in your power, not what isn't.", es: "Asumes el control de lo que está en tu mano, no de lo que no lo está." },
+    "CORRECT": { en: "You revise an earlier statement before it becomes a bigger problem.", es: "Corriges una afirmación anterior antes de que se convierta en un problema mayor." },
+    "CRITERIA": { en: "You use shared, objective criteria instead of personal judgment.", es: "Utilizas criterios objetivos y compartidos en lugar de un juicio personal." },
+    "DECIDE": { en: "You make the call once the criteria are clear.", es: "Tomas la decisión una vez que los criterios están claros." },
+    "DEFEND": { en: "You protect your position instead of engaging with the concern.", es: "Proteges tu postura en lugar de abordar la preocupación." },
+    "DEFER": { en: "You hand the judgment to someone else instead of engaging.", es: "Delegas el juicio a otra persona en lugar de implicarte." },
+    "DEFLECT": { en: "You redirect the question instead of answering it.", es: "Rediriges la pregunta en lugar de responderla." },
+    "DELAY": { en: "You postpone the decision instead of addressing it now.", es: "Aplazas la decisión en lugar de abordarla ahora." },
+    "DELEGATE": { en: "You hand the problem to another team without owning your part.", es: "Trasladas el problema a otro equipo sin asumir tu parte." },
+    "DENY": { en: "You reject the claim without checking if it's accurate.", es: "Rechazas la afirmación sin comprobar si es exacta." },
+    "DIAGNOSE": { en: "You define the scope of the problem before proposing a cause.", es: "Defines el alcance del problema antes de proponer una causa." },
+    "DIRECT": { en: "You answer plainly and give a clear next step.", es: "Respondes con claridad y das un siguiente paso concreto." },
+    "DISCOUNT": { en: "You concede on price before understanding the real objection.", es: "Cedes en el precio antes de entender la objeción real." },
+    "DISMISS": { en: "You reject the comparison instead of examining it.", es: "Rechazas la comparación en lugar de examinarla." },
+    "DOUBLE DOWN": { en: "You repeat an uncertain promise instead of correcting it.", es: "Repites una promesa incierta en lugar de corregirla." },
+    "ESCALATE": { en: "You pass the decision upward before trying to resolve it yourself.", es: "Trasladas la decisión hacia arriba antes de intentar resolverla tú misma." },
+    "EVIDENCE": { en: "You use documented facts instead of memory or opinion.", es: "Utilizas hechos documentados en lugar de la memoria o la opinión." },
+    "EXCUSE": { en: "You explain the cause instead of addressing the impact.", es: "Explicas la causa en lugar de abordar el impacto." },
+    "EXPLAIN": { en: "You offer a reason before confirming it's the right one.", es: "Ofreces una razón antes de confirmar que es la correcta." },
+    "EXPLORE": { en: "You ask what's behind the disagreement instead of dismissing it.", es: "Preguntas qué hay detrás del desacuerdo en lugar de descartarlo." },
+    "FACTS": { en: "You state what's known instead of guessing or apologising.", es: "Expones lo que se sabe en lugar de adivinar o disculparte." },
+    "FLEX": { en: "You offer flexibility, but tie it to a clear trade-off.", es: "Ofreces flexibilidad, pero la vinculas a un intercambio claro." },
+    "FOCUS": { en: "You narrow a broad problem down to what's actually measurable.", es: "Reduces un problema amplio a lo que realmente se puede medir." },
+    "FOLLOW": { en: "You comply with the change without checking if it's understood.", es: "Cumples el cambio sin comprobar si se ha entendido bien." },
+    "FRAME": { en: "You reposition a small ask to show its real impact.", es: "Reformulas una petición pequeña para mostrar su verdadero impacto." },
+    "GIVE IN": { en: "You accept the request without checking the agreed terms first.", es: "Aceptas la petición sin comprobar antes las condiciones acordadas." },
+    "GUESS": { en: "You offer an answer you haven't actually verified.", es: "Das una respuesta que en realidad no has verificado." },
+    "HARD NO": { en: "You refuse without leaving room for negotiation.", es: "Te niegas sin dejar espacio para negociar." },
+    "HEDGE": { en: "You avoid committing to a specific answer.", es: "Evitas comprometerte con una respuesta concreta." },
+    "HONEST": { en: "You state the real risk instead of a comfortable reassurance.", es: "Expones el riesgo real en lugar de una tranquilidad cómoda." },
+    "IDENTIFY": { en: "You name exactly what's missing instead of assuming or blaming.", es: "Identificas exactamente qué falta en lugar de suponer o culpar." },
+    "IGNORE": { en: "You put off the response instead of dealing with it.", es: "Postergas la respuesta en lugar de ocuparte de ella." },
+    "ISOLATE": { en: "You narrow down the scope of the problem before explaining it.", es: "Delimitas el alcance del problema antes de explicarlo." },
+    "MAP": { en: "You lay out the real cause instead of a vague explanation.", es: "Expones la causa real en lugar de una explicación vaga." },
+    "MINIMISE": { en: "You downplay the issue before actually checking its scale.", es: "Minimizas el problema antes de comprobar realmente su magnitud." },
+    "MITIGATE": { en: "You offer concrete options instead of just naming the risk.", es: "Ofreces opciones concretas en lugar de limitarte a señalar el riesgo." },
+    "NARROW": { en: "You reduce scope to meet the real deadline.", es: "Reduces el alcance para cumplir con el plazo real." },
+    "NO": { en: "You refuse outright without exploring what's actually possible.", es: "Te niegas de forma tajante sin explorar qué es realmente posible." },
+    "OVERDO": { en: "You promise more than what was actually asked for.", es: "Prometes más de lo que realmente se te pidió." },
+    "OVEREXPLAIN": { en: "You add detail that dilutes the actual answer.", es: "Añades detalles que diluyen la respuesta real." },
+    "OVERPROMISE": { en: "You commit to a timeframe you haven't actually verified.", es: "Te comprometes con un plazo que en realidad no has verificado." },
+    "OVERREACT": { en: "You respond to a specific problem with an extreme solution.", es: "Respondes a un problema concreto con una solución extrema." },
+    "OWN": { en: "You take responsibility for the outcome, not just the excuse.", es: "Asumes la responsabilidad del resultado, no solo la excusa." },
+    "OWN IT": { en: "You give your own view instead of deferring the decision.", es: "Das tu propia opinión en lugar de aplazar la decisión." },
+    "OWNER": { en: "You confirm exactly who is responsible and by when.", es: "Confirmas exactamente quién es responsable y para cuándo." },
+    "OWNERSHIP": { en: "You commit to finding a clear answer instead of guessing.", es: "Te comprometes a encontrar una respuesta clara en lugar de adivinar." },
+    "PANIC": { en: "You react with urgency instead of a clear plan.", es: "Reaccionas con urgencia en lugar de con un plan claro." },
+    "PARTIAL": { en: "You share what you know while flagging what's still uncertain.", es: "Compartes lo que sabes señalando lo que aún es incierto." },
+    "PASS": { en: "You redirect the decision to someone else entirely.", es: "Trasladas la decisión por completo a otra persona." },
+    "PASS IT ON": { en: "You avoid giving your own view on the issue.", es: "Evitas dar tu propia opinión sobre el asunto." },
+    "PRESSURE": { en: "You push urgency onto someone else instead of managing it yourself.", es: "Trasladas la urgencia a otra persona en lugar de gestionarla tú misma." },
+    "PRIORITISE": { en: "You rank what matters most instead of trying to do everything.", es: "Ordenas lo más importante en lugar de intentar hacerlo todo." },
+    "PROCESS": { en: "You define when you'll communicate next time, not just promise to.", es: "Defines cuándo comunicarás la próxima vez, no solo prometes hacerlo." },
+    "PROMISE": { en: "You commit to an outcome that isn't fully in your control.", es: "Te comprometes con un resultado que no está totalmente en tu mano." },
+    "PUSH BACK": { en: "You challenge the framing instead of accepting it outright.", es: "Cuestionas el planteamiento en lugar de aceptarlo sin más." },
+    "QUANTIFY": { en: "You back up the request with measurable numbers.", es: "Respaldas la petición con cifras medibles." },
+    "QUESTION": { en: "You challenge the given priority instead of accepting it.", es: "Cuestionas la prioridad dada en lugar de aceptarla." },
+    "REALISTIC": { en: "You give a timeframe you can actually stand behind.", es: "Das un plazo que realmente puedes respaldar." },
+    "REASSURE": { en: "You offer confidence without having verified it yet.", es: "Ofreces seguridad sin haberla verificado todavía." },
+    "REFOCUS": { en: "You redirect the message around the real underlying need.", es: "Reorientas el mensaje en torno a la necesidad real de fondo." },
+    "REFUSE": { en: "You decline without offering any alternative.", es: "Rechazas la petición sin ofrecer ninguna alternativa." },
+    "REPRIORITISE": { en: "You rebuild the plan around the new priority, not the old one.", es: "Reconstruyes el plan en torno a la nueva prioridad, no a la anterior." },
+    "REQUEST": { en: "You ask for more without first justifying the need.", es: "Pides más sin justificar antes la necesidad." },
+    "RESET": { en: "You step back from a defensive reaction and refocus on the issue.", es: "Te alejas de una reacción defensiva y vuelves a centrarte en el problema." },
+    "RESIST": { en: "You push back using past effort instead of the current need.", es: "Te resistes apoyándote en el esfuerzo pasado en lugar de la necesidad actual." },
+    "RETREAT": { en: "You abandon your position just to avoid friction.", es: "Abandonas tu postura solo para evitar la fricción." },
+    "RISK": { en: "You name the trade-off honestly instead of hiding it.", es: "Expones el riesgo con honestidad en lugar de ocultarlo." },
+    "SHIFT": { en: "You postpone the real answer with a vague future promise.", es: "Aplazas la respuesta real con una promesa futura vaga." },
+    "STALL": { en: "You delay a clear answer without saying why.", es: "Retrasas una respuesta clara sin explicar por qué." },
+    "STRUCTURE": { en: "You turn chaos into an ordered set of facts and next steps.", es: "Conviertes el caos en un conjunto ordenado de hechos y siguientes pasos." },
+    "TRADEOFF": { en: "You name what's gained and lost instead of just comparing.", es: "Expones lo que se gana y se pierde en lugar de solo comparar." },
+    "UNCLEAR": { en: "You leave the actual timeline undefined.", es: "Dejas el plazo real sin definir." },
+    "VAGUE": { en: "You answer without giving anything specific to act on.", es: "Respondes sin dar nada concreto sobre lo que actuar." },
+    "VALUE": { en: "You anchor the conversation in what's included, not just the price.", es: "Ancla la conversación en lo que incluye, no solo en el precio." },
+    "WAIT": { en: "You let time pass instead of taking any action now.", es: "Dejas pasar el tiempo en lugar de actuar ahora." },
+    "YES": { en: "You agree immediately without checking the actual impact.", es: "Aceptas de inmediato sin comprobar el impacto real." }
+};
+
+
+/* =========================================================
    ENGINE
 ========================================================= */
 
@@ -3429,24 +3536,25 @@ function finishScenario(node) {
         const stepNode =
             trigger.nodes[step.nextKey];
 
-        let consequenceEn;
-        let consequenceEs;
+        const insight =
+            tagInsights[step.strategy];
 
-        if (stepNode && stepNode.client) {
+        const isFinalStep =
+            !(stepNode && stepNode.client);
 
-            consequenceEn =
-                stepNode.client.en;
+        let reactionBlock = "";
 
-            consequenceEs =
-                stepNode.client.es;
+        if (!isFinalStep) {
 
-        } else {
+            reactionBlock = `
+            <div class="path-step-block">
+                <div class="path-step-block-label">
+                    THEIR REACTION / SU REACCIÓN
+                </div>
+                <div class="path-step-en">${stepNode.client.en}</div>
+                <div class="path-step-es">${stepNode.client.es}</div>
+            </div>`;
 
-            consequenceEn =
-                "This led directly to the final outcome below.";
-
-            consequenceEs =
-                "Esto llevó directamente al resultado final que aparece abajo.";
         }
 
         const card =
@@ -3462,19 +3570,12 @@ function finishScenario(node) {
 
             <div class="path-step-block">
                 <div class="path-step-block-label">
-                    YOUR RESPONSE / TU RESPUESTA
+                    WHAT IT MEANS / QUÉ SIGNIFICA
                 </div>
-                <div class="path-step-en">${step.en}</div>
-                <div class="path-step-es">${step.es}</div>
+                <div class="path-step-en">${insight ? insight.en : ""}</div>
+                <div class="path-step-es">${insight ? insight.es : ""}</div>
             </div>
-
-            <div class="path-step-block">
-                <div class="path-step-block-label">
-                    CONSEQUENCE / CONSECUENCIA
-                </div>
-                <div class="path-step-en">${consequenceEn}</div>
-                <div class="path-step-es">${consequenceEs}</div>
-            </div>
+            ${reactionBlock}
         `;
 
         pathEl.appendChild(card);
