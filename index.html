@@ -58,12 +58,16 @@ body {
 
     background: #0b0b0b;
     border-bottom: 1px solid var(--border);
+
+    overflow: hidden;
 }
 
 .logo img {
-    width: 165px;
-    height: auto;
+    height: 130px;
+    width: auto;
+    max-width: 100%;
     display: block;
+    object-fit: contain;
 }
 
 /* =========================
@@ -863,13 +867,17 @@ body {
     }
 
     .logo img {
-        width: 135px;
+        height: 42px;
+
+        width: auto;
+
+        max-width: 100%;
     }
 
     .container {
         width: calc(100% - 18px);
 
-        padding-top: 27px;
+        padding-top: 30px;
     }
 
     .header h1 {
